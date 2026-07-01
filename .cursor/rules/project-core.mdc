@@ -1,0 +1,12 @@
+---
+description: AI 课堂项目核心约定
+alwaysApply: true
+---
+
+# AI 课堂 — 核心约定
+
+- 内容源在 `content/library/`，**不要**直接改 `docs/articles/`（由 sync 脚本生成）
+- 新增文章必须含 frontmatter：title、description、author、date
+- VitePress base 为 `/`，本地预览地址为 http://localhost:5173/
+- Commit message 使用中文，前缀 feat/fix/docs/chore
+- 禁止提交密钥、Token、内网地址

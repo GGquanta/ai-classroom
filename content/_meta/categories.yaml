@@ -1,0 +1,27 @@
+# 内容分类配置
+# 新增分类时运行 npm run sync 更新站点索引
+
+categories:
+  - id: tools
+    label: AI 工具
+    color: "#0b5cab"
+    dir: content/library/tools
+    description: Cursor、Copilot、ChatGPT 等 AI 工具的使用技巧与配置
+
+  - id: workflows
+    label: 协同流程
+    color: "#008556"
+    dir: content/library/workflows
+    description: AI 辅助的开发流程、代码审查、文档协作等工作方式
+
+  - id: prompts
+    label: Prompt 实践
+    color: "#7c3aed"
+    dir: content/library/prompts
+    description: 高效 Prompt 模板、对话策略与上下文管理
+
+  - id: cases
+    label: 案例经验
+    color: "#d97706"
+    dir: content/library/cases
+    description: 真实项目中的 AI 赋能案例、踩坑与复盘

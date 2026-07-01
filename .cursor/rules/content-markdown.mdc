@@ -1,0 +1,32 @@
+---
+description: Markdown 投稿内容规范
+globs: content/**/*.md
+alwaysApply: false
+---
+
+# 内容 Markdown 规范
+
+## Frontmatter 模板
+
+```yaml
+---
+title: 标题
+description: 摘要
+author: 作者
+date: YYYY-MM-DD
+tags: []
+category: tools
+---
+```
+
+## 分类目录
+
+- `library/tools/` — AI 工具
+- `library/workflows/` — 协同流程
+- `library/prompts/` — Prompt 实践
+- `library/cases/` — 案例经验
+
+## 注意
+
+- 图片放 `content/assets/<slug>/`
+- 勿含敏感信息

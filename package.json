@@ -1,0 +1,19 @@
+{
+  "name": "ai-classroom",
+  "version": "0.1.0",
+  "private": true,
+  "description": "团队 AI 协同办公与开发经验知识分享站点",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-content.mjs",
+    "docs:dev": "npm run sync && vitepress dev docs",
+    "docs:build": "npm run sync && vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
