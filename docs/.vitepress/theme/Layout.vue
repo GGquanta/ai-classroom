@@ -13,13 +13,13 @@ const { frontmatter } = useData()
 <template>
   <MoocHome v-if="frontmatter.layout === 'mooc-home'" />
   <ArticlesExplore v-else-if="frontmatter.layout === 'articles-explore'" />
-  <div v-else class="site-shell" :class="{ 'is-article': frontmatter.layout === 'article' }">
+  <div v-else class="site-shell" :class="{ 'is-article': frontmatter.pageType === 'article' }">
     <MoocHeader />
     <DefaultTheme.Layout>
-      <template v-if="frontmatter.layout === 'article'" #doc-before>
+      <template v-if="frontmatter.pageType === 'article'" #doc-before>
         <ArticleHero />
       </template>
-      <template v-if="frontmatter.layout === 'article'" #doc-after>
+      <template v-if="frontmatter.pageType === 'article'" #doc-after>
         <RelatedArticles />
       </template>
     </DefaultTheme.Layout>

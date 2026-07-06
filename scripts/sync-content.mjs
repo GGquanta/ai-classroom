@@ -36,7 +36,7 @@ function parseCategoriesYaml(raw) {
     } else if (trimmed.startsWith('description:')) {
       current.description = trimmed.slice(12).trim()
     } else if (trimmed.startsWith('color:')) {
-      current.color = trimmed.slice(6).trim()
+      current.color = trimmed.slice(6).trim().replace(/^["']|["']$/g, '')
     }
   }
   if (current.id) categories.push(/** @type {Category} */ (current))
@@ -90,9 +90,9 @@ function parseFrontmatter(content) {
  */
 function serializeFrontmatter(meta, slug, categoryId) {
   const lines = ['---']
-  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'layout', 'sidebar', 'aside']
+  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'pageType', 'sidebar', 'aside']
   const merged = {
-    layout: 'article',
+    pageType: 'article',
     sidebar: false,
     aside: true,
     category: categoryId,
