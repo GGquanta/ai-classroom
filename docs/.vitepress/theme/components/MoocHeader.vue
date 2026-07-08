@@ -38,7 +38,7 @@ const isMac = computed(() => {
   <header class="mooc-header">
     <div class="header-inner">
       <a href="/" class="brand" @click="closeMenu">
-        <img src="/favicon.svg" alt="" class="brand-icon" />
+        <img src="/logo.png" alt="" class="brand-icon" />
         <span class="brand-text">国光量子 · AI 课堂</span>
       </a>
 
