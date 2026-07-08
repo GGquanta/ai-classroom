@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import DefaultTheme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import MoocHome from './components/MoocHome.vue'
 import ArticlesExplore from './components/ArticlesExplore.vue'
 import ArticleHero from './components/ArticleHero.vue'
 import RelatedArticles from './components/RelatedArticles.vue'
 import MoocHeader from './components/MoocHeader.vue'
+import MoocDocLayout from './components/MoocDocLayout.vue'
 import { useArticleEnter } from './composables/useArticleEnter'
 
 const { frontmatter, page } = useData()
@@ -28,13 +28,13 @@ const { enterActive } = useArticleEnter(isArticlePage)
     :class="{ 'is-article': isArticlePage, 'article-enter': enterActive && isArticlePage }"
   >
     <MoocHeader />
-    <DefaultTheme.Layout>
+    <MoocDocLayout>
       <template v-if="isArticlePage" #doc-top>
         <ArticleHero />
       </template>
       <template v-if="isArticlePage" #doc-after>
         <RelatedArticles />
       </template>
-    </DefaultTheme.Layout>
+    </MoocDocLayout>
   </div>
 </template>

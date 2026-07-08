@@ -48,6 +48,7 @@
 
 .site-shell.is-article .VPDoc .container {
   max-width: var(--mooc-article-width);
+  margin: 0 auto;
   padding: 0 var(--mooc-space-6);
 }
 
@@ -116,8 +117,18 @@
 }
 
 .site-shell.is-article .VPDoc.has-aside .content-container {
-  max-width: var(--mooc-prose-width);
+  max-width: var(--mooc-article-width);
   width: 100%;
+}
+
+.site-shell.is-article .VPDoc .article-body {
+  display: grid;
+  grid-template-columns: minmax(0, var(--mooc-prose-width)) 240px;
+  gap: var(--mooc-space-10);
+}
+
+.site-shell.is-article .VPDoc .article-body > .main {
+  align-self: start;
 }
 
 .site-shell.is-article .VPDoc .main,
@@ -126,45 +137,36 @@
   width: 100%;
 }
 
-.site-shell.is-article .VPDoc .aside {
-  max-width: 260px;
-  padding-left: 0;
+.site-shell.is-article .VPDoc .article-toc {
+  width: 240px;
+  max-width: 240px;
+  align-self: stretch;
 }
 
-.site-shell.is-article .VPDoc .aside-container {
-  width: 240px;
-  padding-top: calc(var(--mooc-header-height) + var(--vp-doc-top-height, 0px) + var(--mooc-space-10));
+.site-shell.is-article .VPDoc .article-toc-sticky {
+  position: sticky;
+  top: calc(var(--mooc-header-height) + var(--mooc-space-4));
 }
 
-.site-shell.is-article .aside-curtain {
-  width: 240px;
-  background: linear-gradient(transparent, var(--mooc-bg) 85%);
+.site-shell.is-article .VPDoc .article-toc-scroll {
+  max-height: calc(100vh - var(--mooc-header-height) - var(--mooc-space-8));
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.site-shell.is-article .VPDoc .article-toc-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 @media (min-width: 1280px) {
   .site-shell.is-article .VPDoc.has-aside .container {
-    display: grid;
-    grid-template-columns: minmax(0, var(--mooc-prose-width)) 240px;
-    justify-content: center;
-    gap: var(--mooc-space-10);
-    align-items: start;
+    display: block;
   }
 
   .site-shell.is-article .VPDoc .content {
-    order: unset;
     width: 100%;
-    max-width: var(--mooc-prose-width);
-    margin: 0;
-    grid-column: 1;
-  }
-
-  .site-shell.is-article .VPDoc .aside {
-    order: unset;
-    grid-column: 2;
-    width: 240px;
-    max-width: 240px;
-    padding-left: 0;
-    flex: none;
+    max-width: none;
   }
 }
 
@@ -598,7 +600,11 @@
 
 /* Mobile article layout */
 @media (max-width: 1279px) {
-  .site-shell.is-article .VPDoc .aside {
+  .site-shell.is-article .VPDoc .article-body {
+    display: block;
+  }
+
+  .site-shell.is-article .VPDoc .article-toc {
     display: none;
   }
 
