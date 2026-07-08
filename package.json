@@ -15,5 +15,8 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@tabler/icons-vue": "^3.44.0"
   }
 }

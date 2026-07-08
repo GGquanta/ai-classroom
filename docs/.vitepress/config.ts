@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'AI 课堂',
+  title: '国光量子 · AI 课堂',
   description: '团队 AI 协同办公、开发与工具使用经验知识库',
   lang: 'zh-CN',
   base: '/',
@@ -38,8 +38,8 @@ export default defineConfig({
     },
 
     footer: {
-      message: 'AI 课堂 · MIT License',
-      copyright: 'Copyright © AI 课堂贡献者',
+      message: '国光量子 · AI 课堂 · MIT License',
+      copyright: 'Copyright © 国光量子 · AI 课堂贡献者',
     },
 
     docFooter: {
@@ -48,7 +48,7 @@ export default defineConfig({
     },
 
     outline: {
-      label: '本页目录',
+      label: '阅读导航',
     },
 
     lastUpdated: {

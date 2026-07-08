@@ -18,6 +18,11 @@ const CONTENT_ASSETS = join(ROOT, 'content', 'assets')
 
 /** @typedef {{ id: string, label: string, dir: string, description?: string, color?: string }} Category */
 
+/** @param {string} value */
+function stripQuotes(value) {
+  return value.replace(/^["']+|["']+$/g, '')
+}
+
 /** @typedef {{ title: string, description: string, author: string, date: string, tags: string[], category: string, cover?: string, layout?: string, sidebar?: boolean }} ArticleMeta */
 
 function parseCategoriesYaml(raw) {
@@ -36,7 +41,7 @@ function parseCategoriesYaml(raw) {
     } else if (trimmed.startsWith('description:')) {
       current.description = trimmed.slice(12).trim()
     } else if (trimmed.startsWith('color:')) {
-      current.color = trimmed.slice(6).trim()
+      current.color = stripQuotes(trimmed.slice(6).trim())
     }
   }
   if (current.id) categories.push(/** @type {Category} */ (current))
@@ -90,9 +95,8 @@ function parseFrontmatter(content) {
  */
 function serializeFrontmatter(meta, slug, categoryId) {
   const lines = ['---']
-  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'layout', 'sidebar', 'aside']
+  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'sidebar', 'aside']
   const merged = {
-    layout: 'article',
     sidebar: false,
     aside: true,
     category: categoryId,
@@ -190,6 +194,7 @@ async function main() {
   await mkdir(DOCS_ARTICLES, { recursive: true })
   await rm(PUBLIC_ASSETS, { recursive: true, force: true })
   await mkdir(PUBLIC_ASSETS, { recursive: true })
+  await copyDirIfExists(join(CONTENT_ASSETS, '_defaults'), join(PUBLIC_ASSETS, 'defaults'))
   await mkdir(dirname(ARTICLES_DATA), { recursive: true })
 
   /** @type {{ text: string, items: { text: string, link: string }[] }[]} */
@@ -250,7 +255,7 @@ async function main() {
         tags,
         category: category.id,
         categoryLabel: category.label,
-        categoryColor: category.color ?? '#0b5cab',
+        categoryColor: stripQuotes(category.color ?? '#0b5cab'),
         link,
         cover,
       })

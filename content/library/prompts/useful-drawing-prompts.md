@@ -1,7 +1,7 @@
 ---
 title: 用得上的绘图 Prompts
 description: 能源、工业等场景的等距沙盘与数字孪生风格绘图 Prompt 合集，附 Gemini 生成示例。
-author: 赵阳
+author: 朝阳
 date: 2026-06-29
 tags:
   - prompt

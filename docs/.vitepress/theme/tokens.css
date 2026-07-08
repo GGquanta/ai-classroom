@@ -1,0 +1,67 @@
+/* Design tokens — AI 课堂 */
+
+:root {
+  /* Colors */
+  --mooc-primary: #0b5cab;
+  --mooc-primary-dark: #084280;
+  --mooc-primary-soft: rgba(11, 92, 171, 0.08);
+  --mooc-bg: #f8f9fb;
+  --mooc-surface: #ffffff;
+  --mooc-text: #0f172a;
+  --mooc-muted: #64748b;
+  --mooc-border: #e8ecf1;
+  --mooc-footer-bg: #0f172a;
+
+  /* Hero */
+  --mooc-hero-bg: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(11, 92, 171, 0.08) 0%, transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, var(--mooc-bg) 100%);
+
+  /* Typography */
+  --mooc-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', sans-serif;
+  --mooc-text-xs: 0.75rem;
+  --mooc-text-sm: 0.875rem;
+  --mooc-text-base: 1rem;
+  --mooc-text-lg: 1.125rem;
+  --mooc-text-xl: 1.25rem;
+  --mooc-text-2xl: 1.5rem;
+  --mooc-text-3xl: 2rem;
+  --mooc-text-4xl: clamp(2.25rem, 5vw, 3.5rem);
+  --mooc-leading-tight: 1.25;
+  --mooc-leading-normal: 1.5;
+  --mooc-leading-relaxed: 1.75;
+
+  /* Spacing */
+  --mooc-space-1: 4px;
+  --mooc-space-2: 8px;
+  --mooc-space-3: 12px;
+  --mooc-space-4: 16px;
+  --mooc-space-5: 20px;
+  --mooc-space-6: 24px;
+  --mooc-space-8: 32px;
+  --mooc-space-10: 40px;
+  --mooc-space-12: 48px;
+  --mooc-space-16: 64px;
+
+  /* Radius */
+  --mooc-radius-sm: 8px;
+  --mooc-radius-md: 12px;
+  --mooc-radius-lg: 16px;
+  --mooc-radius-full: 999px;
+
+  /* Shadows */
+  --mooc-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.06);
+  --mooc-shadow-md: 0 4px 16px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.04);
+  --mooc-shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.04);
+
+  /* Motion */
+  --mooc-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --mooc-duration: 180ms;
+
+  /* Layout */
+  --mooc-max-width: 1200px;
+  --mooc-content-width: 900px;
+  --mooc-article-width: 1320px;
+  --mooc-prose-width: 920px;
+  --mooc-header-height: 72px;
+}

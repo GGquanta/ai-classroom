@@ -1,7 +1,7 @@
 ---
 title: AI 编程工具快速指南
 description: 从 VS Code、Cline 到 Agent Skills 的完整上手路径，涵盖环境配置、MCP 接入与 AGENTS.md 实践。
-author: 赵阳
+author: 朝阳
 date: 2026-06-28
 tags:
   - vscode

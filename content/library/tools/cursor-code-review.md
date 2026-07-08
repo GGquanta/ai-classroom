@@ -2,7 +2,7 @@
 title: 使用 Cursor 进行代码审查
 description: 介绍如何在 Pull Request 阶段借助 Cursor Agent 做结构化代码审查，提高审查效率与一致性。
 author: 示例作者
-date: 2026-06-30
+date: 2026-06-01
 tags:
   - cursor
   - code-review

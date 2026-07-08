@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import MoocHeader from './MoocHeader.vue'
+import MoocFooter from './MoocFooter.vue'
 import ArticleFilters from './ArticleFilters.vue'
 import ArticleGrid from './ArticleGrid.vue'
 import { useArticles } from '../composables/useArticles'
@@ -43,26 +44,21 @@ const filtered = computed(() => {
   )
   return list
 })
-
-const activeCategoryLabel = computed(() => {
-  if (category.value === 'all') return '全部内容'
-  return categories.value.find((c) => c.id === category.value)?.label ?? '全部内容'
-})
 </script>
 
 <template>
   <div class="mooc-page">
     <MoocHeader />
 
-    <section class="page-hero compact">
-      <div class="section-inner">
+    <section class="page-hero editorial">
+      <div class="section-inner fade-in">
         <h1>探索内容</h1>
-        <p>按分类、作者与时间维度筛选，找到你需要的学习资料</p>
+        <p>按分类、作者与时间筛选，找到你需要的学习资料</p>
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-inner">
+    <section class="section section-explore">
+      <div class="section-inner fade-in">
         <ArticleFilters
           v-model:model-category="category"
           v-model:model-author="author"
@@ -72,7 +68,6 @@ const activeCategoryLabel = computed(() => {
         />
 
         <div class="result-bar">
-          <span>{{ activeCategoryLabel }}</span>
           <span class="result-count">共 {{ filtered.length }} 篇</span>
         </div>
 
@@ -80,10 +75,6 @@ const activeCategoryLabel = computed(() => {
       </div>
     </section>
 
-    <footer class="mooc-footer">
-      <div class="footer-inner">
-        <p>AI 课堂 · {{ filtered.length }} 篇匹配结果</p>
-      </div>
-    </footer>
+    <MoocFooter />
   </div>
 </template>

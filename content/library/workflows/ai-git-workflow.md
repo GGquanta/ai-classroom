@@ -2,7 +2,7 @@
 title: AI 辅助的 Git 工作流
 description: 在 feature 分支开发中结合 AI 工具完成 commit message 撰写、PR 描述生成与变更摘要。
 author: 示例作者
-date: 2026-06-30
+date: 2026-06-01
 tags:
   - git
   - workflow
