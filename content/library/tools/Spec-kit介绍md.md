@@ -1,13 +1,14 @@
-# Spec Kit 使用笔记
-
-GitHub 开源项目：[github/spec-kit](https://github.com/github/spec-kit)  
-文档站：https://github.github.io/spec-kit/  
-
-<p align="center">
-  <img src="../img/logo_small.webp" alt="Spec Kit" width="88" />
-</p>
-
 ---
+
+## title: Spec-kit使用笔记
+description: 介绍Spec-kit，如何使用Spec-kit基本指令并进行项目构建，代码编写
+author: komako
+date: 2026-07-08
+tags:
+  - agent
+  - code-review
+  - github
+category: tools
 
 ## 为什么选用Spec-kit
 
@@ -20,30 +21,6 @@ GitHub 开源项目：[github/spec-kit](https://github.com/github/spec-kit)
 Spec Kit 是 GitHub 维护的一套 **SDD（Spec-Driven Development）工具**，思路很直接：先把需求、方案、任务拆成 Markdown 文件放进仓库，再让 AI 按文件执行。它不是模型，不跑推理；核心是 `specify` CLI + 一组 slash 命令 + shell 脚本。
 
 用Spec-kit做过的内容都会保留记忆，以后的对话中会穿插那次的实际记录。
-
----
-
-## 项目里有什么
-
-| 组件 | 作用 |
-|------|------|
-| `specify` CLI | 初始化项目、装 AI 集成、管理扩展/工作流 |
-| `/speckit.*` 命令 | 写进 `.cursor/commands/` 等目录的 Prompt 模板，由 AI 代理执行 |
-| `specs/NNN-feature/` | 每个特性一份 `spec.md`、`plan.md`、`tasks.md` |
-| `.specify/` | 项目级配置、`constitution.md`、当前特性指针 |
-| `scripts/bash/*.sh` | 建分支、建目录、implement 前检查文件是否齐全 |
-
-运行时分工：
-
-```text
-specify init  →  把模板和命令文件拷进项目
-用户敲 /speckit.specify  →  AI 读 templates/commands/specify.md，按指引写 spec.md
-/speckit.implement  →  AI 读 tasks.md，调 check-prerequisites.sh，再改代码
-```
-
-CLI 不调用任何 LLM API；真正干活的是你打开的 AI 工具。
-
-![SDD 制品关系](../img/sdd-pipeline.png)
 
 ---
 
@@ -75,7 +52,7 @@ uvx --from git+https://github.com/github/spec-kit.git specify init my-app --inte
 
 ### 初始化后的目录
 
-![目录结构](../img/project-structure.png)
+目录结构
 
 ```text
 .
@@ -92,56 +69,68 @@ uvx --from git+https://github.com/github/spec-kit.git specify init my-app --inte
     └── speckit.*.md
 ```
 
-![specify init 过程](../img/specify_cli.gif)
+specify init 过程
 
 ### 安装踩坑
 
-| 现象 | 原因 | 处理 |
-|------|------|------|
-| `pnpm install spec-kit` 失败 | 不是 npm 包 | 用 `uv tool install` |
-| PyPI 上的 `specify-cli` | 非官方维护 | 只从 `github/spec-kit` 装 |
-| `command not found: specify` | PATH 没带上 uv tool | `uv tool update-shell` 或重开终端 |
-| slash 命令列表里没有 speckit | integration 选错 | `specify init . --integration cursor-agent` 重来 |
+
+| 现象                           | 原因               | 处理                                             |
+| ---------------------------- | ---------------- | ---------------------------------------------- |
+| `pnpm install spec-kit` 失败   | 不是 npm 包         | 用 `uv tool install`                            |
+| PyPI 上的 `specify-cli`        | 非官方维护            | 只从 `github/spec-kit` 装                         |
+| `command not found: specify` | PATH 没带上 uv tool | `uv tool update-shell` 或重开终端                   |
+| slash 命令列表里没有 speckit        | integration 选错   | `specify init . --integration cursor-agent` 重来 |
+
 
 ---
 
+
+
 ## 命令说明
 
-![命令分层](../img/commands-overview.png)
+命令分层
 
 ### 核心命令
 
-| 命令 | 写出什么 | 备注 |
-|------|----------|------|
-| `/speckit.constitution` | `.specify/memory/constitution.md` | 项目原则，3–7 条够用 |
-| `/speckit.specify` | `specs/NNN-xxx/spec.md` | 只写做什么、为什么；**别写技术栈** |
-| `/speckit.plan` | `plan.md` | 这里才定技术选型和架构 |
-| `/speckit.tasks` | `tasks.md`（T001…） | 每条最好带文件路径 |
-| `/speckit.implement` | 改代码 | 会先跑 `check-prerequisites.sh` |
-| `/speckit.converge` | 补剩余 tasks | implement 之后跑，没收敛就再 implement |
-| `/speckit.taskstoissues` | GitHub Issues | 可选 |
+
+| 命令                       | 写出什么                              | 备注                            |
+| ------------------------ | --------------------------------- | ----------------------------- |
+| `/speckit.constitution`  | `.specify/memory/constitution.md` | 项目原则，3–7 条够用                  |
+| `/speckit.specify`       | `specs/NNN-xxx/spec.md`           | 只写做什么、为什么；**别写技术栈**           |
+| `/speckit.plan`          | `plan.md`                         | 这里才定技术选型和架构                   |
+| `/speckit.tasks`         | `tasks.md`（T001…）                 | 每条最好带文件路径                     |
+| `/speckit.implement`     | 改代码                               | 会先跑 `check-prerequisites.sh`  |
+| `/speckit.converge`      | 补剩余 tasks                         | implement 之后跑，没收敛就再 implement |
+| `/speckit.taskstoissues` | GitHub Issues                     | 可选                            |
+
+
+
 
 ### 校验类命令（建议别省）
 
-| 命令 | 干什么 |
-|------|--------|
-| `/speckit.clarify` | 需求含糊时先问清楚 |
-| `/speckit.checklist` | 检查 spec **文字**是否完整——不是跑测试 |
-| `/speckit.analyze` | 看 spec / plan / tasks 有没有对不上或漏项 |
+
+| 命令                   | 干什么                             |
+| -------------------- | ------------------------------- |
+| `/speckit.clarify`   | 需求含糊时先问清楚                       |
+| `/speckit.checklist` | 检查 spec **文字**是否完整——不是跑测试       |
+| `/speckit.analyze`   | 看 spec / plan / tasks 有没有对不上或漏项 |
+
 
 **实现细节（specify）**：AI 从描述里抽短名（如 `user-auth`），`create-new-feature.sh` 建 `specs/003-user-auth/`，从模板复制 `spec.md` 再填内容。开了 git 扩展的话会同步建 `003-user-auth` 分支。
 
 **实现细节（implement）**：`check-prerequisites.sh` 确认三份文件都在，然后按 T001、T002… 顺序改。constitution 里的约束（比如必须有测试）会被 Prompt 引用。
 
-![在代理里调用 slash 命令](../img/bootstrap-claude-code.gif)
+在代理里调用 slash 命令
 
 ---
+
+
 
 ## 工作流
 
 两条路，按需求复杂度选：
 
-![精简 vs 生产路径](../img/sdd-workflow-paths.png)
+精简 vs 生产路径
 
 **实验 / 小功能**（官方 quickstart 也这么走）：
 
@@ -172,7 +161,13 @@ specify workflow add speckit
 specify workflow run speckit --input spec="用户认证，支持 OAuth"
 ```
 
+
+
+详细工作流演示视频:[https://www.youtube.com/watch?v=a9eR1xsfvHg](https://www.youtube.com/watch?v=a9eR1xsfvHg)
+
 ---
+
+
 
 ## 什么时候用 / 什么时候别用
 
@@ -190,37 +185,50 @@ specify workflow run speckit --input spec="用户认证，支持 OAuth"
 
 ---
 
+
+
 ## 注意事项（简表）
 
-| 类别 | 记住这些 |
-|------|----------|
-| 流程 | specify 不写技术栈；analyze 在 implement 前；converge 跑完再收工 |
-| 人工 | implement 的 diff 要 review；analyze 给线索，根因自己确认 |
-| 制品 | tasks 别写「优化性能」这种空话；需求变了先改 spec 再改 plan |
-| 安全 | 别把密钥写进 spec；制品会 commit |
+
+| 类别  | 记住这些                                               |
+| --- | -------------------------------------------------- |
+| 流程  | specify 不写技术栈；analyze 在 implement 前；converge 跑完再收工 |
+| 人工  | implement 的 diff 要 review；analyze 给线索，根因自己确认       |
+| 制品  | tasks 别写「优化性能」这种空话；需求变了先改 spec 再改 plan             |
+| 安全  | 别把密钥写进 spec；制品会 commit                             |
+
 
 implement 不能替代 code review，和用 Cursor 审 PR 是一个道理。
 
 ---
 
+
+
 ## 常见问题
 
-| 问题 | 处理 |
-|------|------|
-| implement 报 prerequisites 失败 | spec / plan / tasks 没齐，按顺序补命令 |
-| slash 命令不出现 | 检查 `--integration` 是否匹配当前 IDE |
-| 特性目录编号乱了 | 看 `.specify/init-options.json` 里 `feature_numbering` |
-| Windows 脚本执行失败 | `specify init . --script ps` |
+
+| 问题                           | 处理                                                   |
+| ---------------------------- | ---------------------------------------------------- |
+| implement 报 prerequisites 失败 | spec / plan / tasks 没齐，按顺序补命令                        |
+| slash 命令不出现                  | 检查 `--integration` 是否匹配当前 IDE                        |
+| 特性目录编号乱了                     | 看 `.specify/init-options.json` 里 `feature_numbering` |
+| Windows 脚本执行失败               | `specify init . --script ps`                         |
+
 
 ---
 
+
+
 ## 参考链接
 
-| | |
-|---|---|
-| 仓库 | https://github.com/github/spec-kit |
-| Quick Start | https://github.github.io/spec-kit/quickstart.html |
-| 安装 | https://github.github.io/spec-kit/installation.html |
-| 集成列表 | https://github.github.io/spec-kit/reference/integrations.html |
-| SDD 长文 | https://github.com/github/spec-kit/blob/main/spec-driven.md |
-| 本地副本 | `~/personal_knowledge_base/spec-kit-main/` |
+
+|             |                                                                                                                                |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| 仓库          | [https://github.com/github/spec-kit](https://github.com/github/spec-kit)                                                       |
+| Quick Start | [https://github.github.io/spec-kit/quickstart.html](https://github.github.io/spec-kit/quickstart.html)                         |
+| 安装          | [https://github.github.io/spec-kit/installation.html](https://github.github.io/spec-kit/installation.html)                     |
+| 集成列表        | [https://github.github.io/spec-kit/reference/integrations.html](https://github.github.io/spec-kit/reference/integrations.html) |
+| SDD 长文      | [https://github.com/github/spec-kit/blob/main/spec-driven.md](https://github.com/github/spec-kit/blob/main/spec-driven.md)     |
+| 本地副本        | `~/personal_knowledge_base/spec-kit-main/`                                                                                     |
+
+
