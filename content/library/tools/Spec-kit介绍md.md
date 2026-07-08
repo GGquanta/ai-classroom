@@ -1,7 +1,7 @@
 ---
 title: Spec-kit使用笔记
 description: 介绍Spec-kit，如何使用Spec-kit基本指令并进行项目构建，代码编写
-author: komako
+author: wh
 date: 2026-07-08
 tags:
   - agent
