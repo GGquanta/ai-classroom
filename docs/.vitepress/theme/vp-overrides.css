@@ -95,7 +95,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .site-shell.is-article.article-enter .article-hero-content {
+  .site-shell.is-article.article-enter .article-hero-text {
     animation: article-enter-up 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 

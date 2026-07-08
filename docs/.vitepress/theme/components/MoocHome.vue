@@ -21,6 +21,17 @@ onMounted(() => {
     <MoocHeader />
 
     <section class="hero hero-editorial">
+      <img
+        class="hero-bg"
+        src="/hero/home-hero-bg.jpg"
+        alt=""
+        width="1920"
+        height="1280"
+        fetchpriority="high"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <div class="hero-overlay" aria-hidden="true" />
       <div class="hero-inner fade-in">
         <p class="hero-eyebrow">团队知识库 · 持续更新</p>
         <h1 class="hero-title">AI 协同办公与开发<br />实战经验课堂</h1>
@@ -32,6 +43,12 @@ onMounted(() => {
           <a href="/guide/contributing" class="btn btn-secondary">参与投稿</a>
         </div>
       </div>
+      <p class="hero-photo-credit">
+        Photo by
+        <a href="https://unsplash.com/photos/dFohf_GUZJ0" target="_blank" rel="noopener">Y Kang</a>
+        on
+        <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a>
+      </p>
     </section>
 
     <section class="section section-featured">

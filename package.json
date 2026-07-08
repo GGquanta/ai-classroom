@@ -17,6 +17,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@tabler/icons-vue": "^3.44.0"
+    "@tabler/icons-vue": "^3.44.0",
+    "fflate": "^0.8.2"
   }
 }

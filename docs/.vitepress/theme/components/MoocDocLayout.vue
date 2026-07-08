@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import VPFooter from 'vitepress/dist/client/theme-default/components/VPFooter.vue'
 import MoocVPContent from './MoocVPContent.vue'
+import MoocFooter from './MoocFooter.vue'
 </script>
 
 <template>
@@ -30,6 +30,6 @@ import MoocVPContent from './MoocVPContent.vue'
       <template #aside-ads-before><slot name="aside-ads-before" /></template>
       <template #aside-ads-after><slot name="aside-ads-after" /></template>
     </MoocVPContent>
-    <VPFooter />
+    <MoocFooter />
   </div>
 </template>

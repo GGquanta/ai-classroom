@@ -14,6 +14,7 @@ const CATEGORIES_FILE = join(ROOT, 'content', '_meta', 'categories.yaml')
 const SIDEBAR_SNIPPET = join(ROOT, 'docs', '.vitepress', 'sidebar.generated.json')
 const ARTICLES_DATA = join(ROOT, 'docs', '.vitepress', 'data', 'articles.json')
 const PUBLIC_ASSETS = join(ROOT, 'docs', 'public', 'assets')
+const ARTICLE_SOURCES = join(ROOT, 'docs', 'public', 'article-sources')
 const CONTENT_ASSETS = join(ROOT, 'content', 'assets')
 
 /** @typedef {{ id: string, label: string, dir: string, description?: string, color?: string }} Category */
@@ -194,6 +195,8 @@ async function main() {
   await mkdir(DOCS_ARTICLES, { recursive: true })
   await rm(PUBLIC_ASSETS, { recursive: true, force: true })
   await mkdir(PUBLIC_ASSETS, { recursive: true })
+  await rm(ARTICLE_SOURCES, { recursive: true, force: true })
+  await mkdir(ARTICLE_SOURCES, { recursive: true })
   await copyDirIfExists(join(CONTENT_ASSETS, '_defaults'), join(PUBLIC_ASSETS, 'defaults'))
   await mkdir(dirname(ARTICLES_DATA), { recursive: true })
 
@@ -241,6 +244,10 @@ async function main() {
       ) + rewrittenBody
 
       await writeFile(join(destDir, `${slug}.md`), output, 'utf-8')
+
+      const sourceDir = join(ARTICLE_SOURCES, category.id)
+      await mkdir(sourceDir, { recursive: true })
+      await writeFile(join(sourceDir, `${slug}.md`), rewrittenBody, 'utf-8')
 
       const link = `/articles/${category.id}/${slug}`
       items.push({ title, slug, link })
