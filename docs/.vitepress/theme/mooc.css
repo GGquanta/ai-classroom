@@ -567,10 +567,25 @@
   padding: var(--mooc-space-4);
 }
 
+.card-category-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mooc-space-2);
+}
+
 .card-category {
   font-size: var(--mooc-text-xs);
   font-weight: 700;
   letter-spacing: 0.02em;
+}
+
+.card-lock-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #d4a017;
 }
 
 .card-title {
@@ -1054,6 +1069,7 @@
 
 .article-password-submit {
   width: 100%;
+  justify-content: center;
 }
 
 .article-password-error {

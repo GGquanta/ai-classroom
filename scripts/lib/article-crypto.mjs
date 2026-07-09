@@ -1,10 +1,26 @@
 import { createHash, pbkdf2Sync, randomBytes, createCipheriv } from 'node:crypto'
-import MarkdownIt from 'markdown-it'
+import { join } from 'node:path'
+import { createMarkdownRenderer } from 'vitepress'
 
 export const PBKDF2_SALT = 'ai-classroom-protected'
 export const PBKDF2_ITERATIONS = 100_000
 
-const md = new MarkdownIt({ html: false, linkify: true })
+/** @type {import('markdown-it').default | null} */
+let markdownRenderer = null
+
+/** @param {string} rootDir 仓库根目录 */
+export async function initProtectedMarkdownRenderer(rootDir) {
+  if (markdownRenderer) return markdownRenderer
+
+  markdownRenderer = await createMarkdownRenderer(
+    join(rootDir, 'docs'),
+    {},
+    '/',
+    console,
+  )
+
+  return markdownRenderer
+}
 
 /** @param {string} password */
 export function hashPassword(password) {
@@ -35,8 +51,12 @@ export function encryptContent(plaintext, password) {
 }
 
 /** @param {string} markdown */
-export function renderMarkdownToHtml(markdown) {
-  return md.render(markdown)
+export async function renderMarkdownToHtml(markdown) {
+  if (!markdownRenderer) {
+    throw new Error('受保护文章 Markdown 渲染器未初始化，请先调用 initProtectedMarkdownRenderer')
+  }
+
+  return markdownRenderer.render(markdown)
 }
 
 /**

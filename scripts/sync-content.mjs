@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url'
 import {
   hashPassword,
   encryptArticlePayload,
+  initProtectedMarkdownRenderer,
   renderMarkdownToHtml,
 } from './lib/article-crypto.mjs'
 
@@ -270,6 +271,8 @@ async function main() {
 
   const accessPassword = process.env.ARTICLE_ACCESS_PASSWORD?.trim() || ''
 
+  await initProtectedMarkdownRenderer(ROOT)
+
   for (const category of categories) {
     const srcDir = join(ROOT, category.dir)
     const destDir = join(DOCS_ARTICLES, category.id)
@@ -313,7 +316,7 @@ async function main() {
           )
         }
 
-        const html = renderMarkdownToHtml(rewrittenBody)
+        const html = await renderMarkdownToHtml(rewrittenBody)
         protectedContent[articleId] = encryptArticlePayload(html, rewrittenBody, accessPassword)
 
         const output = serializeFrontmatter(
