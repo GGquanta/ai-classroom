@@ -4,8 +4,12 @@
  * 生成 articles.json 索引与 sidebar 配置。
  */
 import { readFile, writeFile, readdir, mkdir, rm, cp } from 'node:fs/promises'
+import { execFile } from 'node:child_process'
+import { promisify } from 'node:util'
 import { join, relative, dirname, basename, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+
+const execFileAsync = promisify(execFile)
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
@@ -16,6 +20,9 @@ const ARTICLES_DATA = join(ROOT, 'docs', '.vitepress', 'data', 'articles.json')
 const PUBLIC_ASSETS = join(ROOT, 'docs', 'public', 'assets')
 const ARTICLE_SOURCES = join(ROOT, 'docs', 'public', 'article-sources')
 const CONTENT_ASSETS = join(ROOT, 'content', 'assets')
+const AVATARS_SRC = join(ROOT, 'avatars')
+const AVATARS_ASSETS = join(CONTENT_ASSETS, 'avatars')
+const IMPORT_DIR = join(ROOT, 'import')
 
 /** @typedef {{ id: string, label: string, dir: string, description?: string, color?: string }} Category */
 
@@ -186,6 +193,68 @@ async function copyDirIfExists(srcDir, destDir) {
   }
 }
 
+/**
+ * 从 import/<slug>/readme.md 读取作者显示名称
+ * @param {string} slug
+ */
+async function readAuthorNameFromImport(slug) {
+  try {
+    const readme = await readFile(join(IMPORT_DIR, slug, 'readme.md'), 'utf-8')
+    const match = readme.match(/作者名称[：:]\s*(.+)/)
+    return match ? match[1].trim() : slug
+  } catch {
+    return slug
+  }
+}
+
+/**
+ * 将 avatars/ 源图居中裁剪为 512×512 并输出到 content/assets/avatars/
+ * @returns {Promise<Record<string, string>>} 作者名 → 公开路径
+ */
+async function processAvatars() {
+  /** @type {Record<string, string>} */
+  const authorAvatars = {}
+
+  let files = []
+  try {
+    files = await readdir(AVATARS_SRC)
+  } catch {
+    return authorAvatars
+  }
+
+  await mkdir(AVATARS_ASSETS, { recursive: true })
+
+  for (const file of files) {
+    if (!/\.(jpe?g|png|webp)$/i.test(file)) continue
+
+    const slug = basename(file, extname(file))
+    const destFile = `${slug}.jpg`
+    const srcPath = join(AVATARS_SRC, file)
+    const destPath = join(AVATARS_ASSETS, destFile)
+
+    try {
+      await execFileAsync('magick', [
+        srcPath,
+        '-auto-orient',
+        '-resize', '512x512^',
+        '-gravity', 'center',
+        '-extent', '512x512',
+        '-strip',
+        '-quality', '85',
+        destPath,
+      ])
+    } catch (err) {
+      console.warn(`⚠ 头像处理失败 ${file}:`, err instanceof Error ? err.message : err)
+      continue
+    }
+
+    const authorName = await readAuthorNameFromImport(slug)
+    authorAvatars[authorName] = `/assets/avatars/${destFile}`
+  }
+
+  return authorAvatars
+}
+
 async function main() {
   const categoriesRaw = await readFile(CATEGORIES_FILE, 'utf-8')
   const { categories } = parseCategoriesYaml(categoriesRaw)
@@ -198,6 +267,8 @@ async function main() {
   await rm(ARTICLE_SOURCES, { recursive: true, force: true })
   await mkdir(ARTICLE_SOURCES, { recursive: true })
   await copyDirIfExists(join(CONTENT_ASSETS, '_defaults'), join(PUBLIC_ASSETS, 'defaults'))
+  const authorAvatars = await processAvatars()
+  await copyDirIfExists(AVATARS_ASSETS, join(PUBLIC_ASSETS, 'avatars'))
   await mkdir(dirname(ARTICLES_DATA), { recursive: true })
 
   /** @type {{ text: string, items: { text: string, link: string }[] }[]} */
@@ -282,7 +353,7 @@ async function main() {
 
   await writeFile(
     ARTICLES_DATA,
-    JSON.stringify({ categories, articles, authors }, null, 2) + '\n',
+    JSON.stringify({ categories, articles, authors, authorAvatars }, null, 2) + '\n',
     'utf-8',
   )
   await writeFile(SIDEBAR_SNIPPET, JSON.stringify(sidebar, null, 2) + '\n', 'utf-8')

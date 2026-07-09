@@ -27,6 +27,7 @@ const data = articlesData as {
   categories: Category[]
   articles: Article[]
   authors: string[]
+  authorAvatars?: Record<string, string>
 }
 
 export function useArticles() {
@@ -114,6 +115,11 @@ function hashString(value: string): number {
 export function getArticleCover(article: Pick<Article, 'id' | 'cover'>): string {
   if (article.cover) return article.cover
   return DEFAULT_COVERS[hashString(article.id) % DEFAULT_COVERS.length]
+}
+
+/** 作者头像：avatars/ 经 sync 处理后按作者名映射，无头像返回 null */
+export function getAuthorAvatar(author: string): string | null {
+  return data.authorAvatars?.[author] ?? null
 }
 
 export function isDefaultCover(cover: string): boolean {

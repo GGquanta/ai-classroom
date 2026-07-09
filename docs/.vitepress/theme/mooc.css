@@ -916,6 +916,13 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.meta-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .meta-author-name {

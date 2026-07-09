@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useData } from 'vitepress'
 import { IconUser, IconCalendar, IconChevronRight, IconCopy, IconDownload } from '@tabler/icons-vue'
-import { useArticles, formatDate, normalizeColor, getArticleCover } from '../composables/useArticles'
+import { useArticles, formatDate, normalizeColor, getArticleCover, getAuthorAvatar } from '../composables/useArticles'
 import {
   fetchArticleBody,
   buildPrompt,
@@ -21,6 +21,10 @@ const categoryColor = computed(() =>
 )
 
 const coverSrc = computed(() => (article.value ? getArticleCover(article.value) : ''))
+
+const authorAvatar = computed(() =>
+  article.value ? getAuthorAvatar(article.value.author) : null,
+)
 
 const copying = ref(false)
 const copied = ref(false)
@@ -121,7 +125,13 @@ async function handleDownloadSkill() {
           <div class="article-hero-meta">
             <div class="meta-author-block">
               <span class="meta-avatar" aria-hidden="true">
-                <IconUser :size="20" :stroke="1.75" />
+                <img
+                  v-if="authorAvatar"
+                  :src="authorAvatar"
+                  :alt="article.author"
+                  class="meta-avatar-img"
+                />
+                <IconUser v-else :size="20" :stroke="1.75" />
               </span>
               <div>
                 <span class="meta-author-name">{{ article.author }}</span>
