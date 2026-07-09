@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ai-classroom",
+  "compatibility_date": "2026-07-09",
+  "routes": [
+    {
+      "pattern": "ai-classroom.qubitlab.cc",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "./docs/.vitepress/dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

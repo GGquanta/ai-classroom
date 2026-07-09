@@ -33,3 +33,7 @@ npm-debug.log*
 # Temp
 tmp/
 .temp/
+
+# Cloudflare Workers
+.wrangler/
+.dev.vars*

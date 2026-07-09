@@ -13,7 +13,7 @@
 | 静态站点 | [VitePress](https://vitepress.dev/) 1.x |
 | 包管理 | npm |
 | 运行时 | Node.js ≥ 20 |
-| 部署 | GitHub Pages + GitHub Actions |
+| 部署 | Cloudflare Workers Builds（Git 推送自动部署） |
 | 内容格式 | Markdown + YAML frontmatter |
 
 ## 目录与职责
@@ -96,7 +96,7 @@ cover: /assets/<slug>/cover.png   # 可选，卡片封面图
 - **变更范围**：只改与任务相关的文件；不做无关重构
 - **docs/articles/**：视为生成目录，修改内容应改 `content/library/` 源文件
 - **base 路径**：VitePress `base` 为 `/`（根路径部署）
-- **站点域名**：生产环境 `https://ai-classroom.qubitlab.cc`；`docs/public/CNAME` 已配置自定义域名
+- **站点域名**：生产环境 `https://ai-classroom.qubitlab.cc`；自定义域名在 `wrangler.jsonc` 的 `routes` 中配置
 - **密钥**：禁止在内容或配置中提交 Token、密码、内网地址
 
 ## PR / 提交约定

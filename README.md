@@ -1,6 +1,6 @@
 # AI 课堂
 
-团队 **AI 协同办公、开发赋能与工具使用** 经验的知识分享站点。成员在 `content/` 目录投稿 Markdown 资料，经审核后自动构建为静态网站并发布至 [https://ai-classroom.qubitlab.cc](https://ai-classroom.qubitlab.cc)（GitHub Pages + 自定义域名）。
+团队 **AI 协同办公、开发赋能与工具使用** 经验的知识分享站点。成员在 `content/` 目录投稿 Markdown 资料，经审核后自动构建为静态网站并发布至 [https://ai-classroom.qubitlab.cc](https://ai-classroom.qubitlab.cc)（Cloudflare Workers + 自定义域名）。
 
 ## 功能特性
 
@@ -26,7 +26,8 @@ ai-classroom/
 ├── import/                  # 待导入的原始资料（按作者分子目录）
 ├── scripts/                 # 自动化脚本
 │   └── sync-content.mjs     # 内容同步
-├── .github/workflows/       # CI / 部署
+├── wrangler.jsonc           # Cloudflare Workers 部署配置
+├── .github/workflows/       # CI（PR 构建验证）
 ├── AGENTS.md                # AI 助手协作说明
 ├── CONTRIBUTING.md          # 贡献指南
 └── README.md
@@ -78,9 +79,45 @@ npm run docs:preview
 
 ## 部署
 
-站点通过 GitHub Actions 部署至 GitHub Pages，默认访问域名为 **https://ai-classroom.qubitlab.cc**。
+站点通过 **Cloudflare Workers Builds** 从 GitHub 仓库自动构建并部署，生产域名为 **https://ai-classroom.qubitlab.cc**。
 
-首次启用需在仓库 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**，并在 **Custom domain** 中填写 `ai-classroom.qubitlab.cc`（DNS 需配置 CNAME 指向 GitHub Pages）。
+### 仓库内配置
+
+| 文件 | 作用 |
+|------|------|
+| `wrangler.jsonc` | Workers 静态资源目录、404 处理、自定义域名 |
+| `.node-version` | Cloudflare Builds 使用 Node.js 22 |
+| `package.json` → `docs:build` | 构建命令（含内容同步 + VitePress） |
+| `package.json` → `deploy` | 本地构建并部署 |
+
+构建产物目录：`docs/.vitepress/dist`（由 `wrangler.jsonc` 的 `assets.directory` 指定）。
+
+### 首次绑定 Cloudflare（一次性）
+
+1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create**
+2. 选择 **Import from Git**，连接 `GGquanta/ai-classroom` 仓库
+3. 配置 **Workers Builds**：
+   - **Production branch**：`main`
+   - **Build command**：`npm run docs:build`
+   - **Deploy command**：`npx wrangler deploy`（默认即可）
+4. 保存后，推送至 `main` 将自动触发构建与部署
+
+自定义域名 `ai-classroom.qubitlab.cc` 已在 `wrangler.jsonc` 中声明；首次部署后 Cloudflare 会自动创建 DNS 记录（需 `qubitlab.cc`  zone 在同一账号下）。
+
+### 从 GitHub Pages 迁移
+
+若此前使用 GitHub Pages：
+
+1. 在仓库 **Settings → Pages** 中关闭 GitHub Pages
+2. 将 `ai-classroom.qubitlab.cc` 的 DNS 从 GitHub Pages CNAME 改为 Cloudflare Worker 自定义域名（部署后由 Cloudflare 自动管理）
+
+### 本地手动部署
+
+```bash
+npm run deploy
+```
+
+需先执行 `npx wrangler login` 完成 Cloudflare 认证。
 
 部署地址：https://ai-classroom.qubitlab.cc
 

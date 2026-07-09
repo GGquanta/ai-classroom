@@ -21,7 +21,7 @@ content/
 1. 作者在 `inbox/` 或 `library/<分类>/` 撰写 Markdown
 2. 提交 PR，由维护者审核
 3. 合并至 `main` 后，`scripts/sync-content.mjs` 将内容同步至 `docs/articles/`
-4. GitHub Actions 构建 VitePress 并部署至 GitHub Pages
+4. 合并至 `main` 后，Cloudflare Workers Builds 自动构建 VitePress 并部署
 
 ## 注意事项
 

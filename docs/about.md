@@ -13,7 +13,7 @@
 - **内容源**：`content/` 目录下的 Markdown 文件
 - **站点生成**：[VitePress](https://vitepress.dev/) 静态站点
 - **同步脚本**：`scripts/sync-content.mjs`
-- **部署**：[GitHub Pages](https://pages.github.com/) + GitHub Actions，自定义域名 [ai-classroom.qubitlab.cc](https://ai-classroom.qubitlab.cc)
+- **部署**：[Cloudflare Workers](https://developers.cloudflare.com/workers/static-assets/) + Workers Builds（Git 推送自动部署），自定义域名 [ai-classroom.qubitlab.cc](https://ai-classroom.qubitlab.cc)
 
 ## 参与贡献
 
