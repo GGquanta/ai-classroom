@@ -1,4 +1,4 @@
-import { createHash, pbkdf2Sync, randomBytes, createCipheriv } from 'node:crypto'
+import { createHash, pbkdf2Sync, randomBytes, createCipheriv, createDecipheriv } from 'node:crypto'
 import { join } from 'node:path'
 import { createMarkdownRenderer } from 'vitepress'
 
@@ -50,6 +50,21 @@ export function encryptContent(plaintext, password) {
   }
 }
 
+/**
+ * @param {{ iv: string, ciphertext: string, tag: string }} payload
+ * @param {string} password
+ */
+export function decryptContent(payload, password) {
+  const key = deriveKey(password)
+  const decipher = createDecipheriv('aes-256-gcm', key, Buffer.from(payload.iv, 'base64'))
+  decipher.setAuthTag(Buffer.from(payload.tag, 'base64'))
+  const decrypted = Buffer.concat([
+    decipher.update(Buffer.from(payload.ciphertext, 'base64')),
+    decipher.final(),
+  ])
+  return decrypted.toString('utf8')
+}
+
 /** @param {string} markdown */
 export async function renderMarkdownToHtml(markdown) {
   if (!markdownRenderer) {
@@ -67,4 +82,14 @@ export async function renderMarkdownToHtml(markdown) {
 export function encryptArticlePayload(html, markdown, password) {
   const payload = JSON.stringify({ html, markdown })
   return encryptContent(payload, password)
+}
+
+/**
+ * @param {{ iv: string, ciphertext: string, tag: string }} payload
+ * @param {string} password
+ * @returns {{ html: string, markdown: string }}
+ */
+export function decryptArticlePayload(payload, password) {
+  const raw = decryptContent(payload, password)
+  return JSON.parse(raw)
 }

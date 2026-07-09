@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "sync": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/sync-content.mjs",
+    "test": "node --test tests/**/*.test.mjs",
     "docs:dev": "npm run sync && vitepress dev docs",
     "docs:build": "npm run sync && vitepress build docs",
     "docs:preview": "vitepress preview docs",
