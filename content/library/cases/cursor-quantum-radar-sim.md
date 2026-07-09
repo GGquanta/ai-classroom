@@ -1,7 +1,7 @@
 ---
 title: 用 Cursor 打造光量子雷达仿真转台系统
 description: 用 Cursor 从状态机、仿真/硬件抽象接口到工业风 HMI，逐步完成光量子雷达无人机威胁检测引导链路仿真系统的实践复盘。
-author: caochuanding
+author: 无敌大王
 date: 2026-07-08
 tags:
   - cursor

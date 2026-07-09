@@ -1,7 +1,7 @@
 ---
 title: 用 CC Switch 统一管理多个 AI 编程工具
 description: 用开源桌面工具 CC Switch 统一管理 Claude Code、Codex、OpenCode 等 CLI 的供应商、MCP、Prompts 与 Skills，减少手改配置文件。
-author: caochuanding
+author: 无敌大王
 date: 2026-07-08
 tags:
   - cc-switch
