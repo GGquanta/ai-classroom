@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'AI 课堂',
+  title: '国光量子 · AI 课堂',
   description: '团队 AI 协同办公、开发与工具使用经验知识库',
   lang: 'zh-CN',
   base: '/',
@@ -10,11 +10,15 @@ export default defineConfig({
   hostname: 'https://ai-classroom.qubitlab.cc',
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
+    ['link', { rel: 'icon', href: '/favicon.ico', sizes: 'any' }],
+    ['link', { rel: 'icon', href: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' }],
+    ['link', { rel: 'icon', href: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }],
+    ['link', { rel: 'manifest', href: '/site.webmanifest' }],
   ],
 
   themeConfig: {
-    logo: '/favicon.svg',
+    logo: '/logo.png',
     sidebar: {
       '/guide/': [
         {
@@ -38,8 +42,8 @@ export default defineConfig({
     },
 
     footer: {
-      message: 'AI 课堂 · MIT License',
-      copyright: 'Copyright © AI 课堂贡献者',
+      message: '国光量子 · AI 课堂 · MIT License',
+      copyright: 'Copyright © 国光量子 · AI 课堂贡献者',
     },
 
     docFooter: {
@@ -48,7 +52,7 @@ export default defineConfig({
     },
 
     outline: {
-      label: '本页目录',
+      label: '阅读导航',
     },
 
     lastUpdated: {

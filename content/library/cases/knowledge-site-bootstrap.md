@@ -2,7 +2,7 @@
 title: 文档站点从 0 到 1 的 AI 协作案例
 description: 使用 AI 助手初始化 VitePress 知识库项目、编写同步脚本与 CI 配置的实践复盘。
 author: 示例作者
-date: 2026-06-30
+date: 2026-06-01
 tags:
   - vitepress
   - github-pages

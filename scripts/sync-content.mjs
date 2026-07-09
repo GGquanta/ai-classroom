@@ -14,9 +14,15 @@ const CATEGORIES_FILE = join(ROOT, 'content', '_meta', 'categories.yaml')
 const SIDEBAR_SNIPPET = join(ROOT, 'docs', '.vitepress', 'sidebar.generated.json')
 const ARTICLES_DATA = join(ROOT, 'docs', '.vitepress', 'data', 'articles.json')
 const PUBLIC_ASSETS = join(ROOT, 'docs', 'public', 'assets')
+const ARTICLE_SOURCES = join(ROOT, 'docs', 'public', 'article-sources')
 const CONTENT_ASSETS = join(ROOT, 'content', 'assets')
 
 /** @typedef {{ id: string, label: string, dir: string, description?: string, color?: string }} Category */
+
+/** @param {string} value */
+function stripQuotes(value) {
+  return value.replace(/^["']+|["']+$/g, '')
+}
 
 /** @typedef {{ title: string, description: string, author: string, date: string, tags: string[], category: string, cover?: string, layout?: string, sidebar?: boolean }} ArticleMeta */
 
@@ -36,7 +42,7 @@ function parseCategoriesYaml(raw) {
     } else if (trimmed.startsWith('description:')) {
       current.description = trimmed.slice(12).trim()
     } else if (trimmed.startsWith('color:')) {
-      current.color = trimmed.slice(6).trim().replace(/^["']|["']$/g, '')
+      current.color = stripQuotes(trimmed.slice(6).trim())
     }
   }
   if (current.id) categories.push(/** @type {Category} */ (current))
@@ -90,9 +96,8 @@ function parseFrontmatter(content) {
  */
 function serializeFrontmatter(meta, slug, categoryId) {
   const lines = ['---']
-  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'pageType', 'sidebar', 'aside']
+  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'sidebar', 'aside']
   const merged = {
-    pageType: 'article',
     sidebar: false,
     aside: true,
     category: categoryId,
@@ -190,6 +195,9 @@ async function main() {
   await mkdir(DOCS_ARTICLES, { recursive: true })
   await rm(PUBLIC_ASSETS, { recursive: true, force: true })
   await mkdir(PUBLIC_ASSETS, { recursive: true })
+  await rm(ARTICLE_SOURCES, { recursive: true, force: true })
+  await mkdir(ARTICLE_SOURCES, { recursive: true })
+  await copyDirIfExists(join(CONTENT_ASSETS, '_defaults'), join(PUBLIC_ASSETS, 'defaults'))
   await mkdir(dirname(ARTICLES_DATA), { recursive: true })
 
   /** @type {{ text: string, items: { text: string, link: string }[] }[]} */
@@ -237,6 +245,10 @@ async function main() {
 
       await writeFile(join(destDir, `${slug}.md`), output, 'utf-8')
 
+      const sourceDir = join(ARTICLE_SOURCES, category.id)
+      await mkdir(sourceDir, { recursive: true })
+      await writeFile(join(sourceDir, `${slug}.md`), rewrittenBody, 'utf-8')
+
       const link = `/articles/${category.id}/${slug}`
       items.push({ title, slug, link })
 
@@ -250,7 +262,7 @@ async function main() {
         tags,
         category: category.id,
         categoryLabel: category.label,
-        categoryColor: category.color ?? '#0b5cab',
+        categoryColor: stripQuotes(category.color ?? '#0b5cab'),
         link,
         cover,
       })

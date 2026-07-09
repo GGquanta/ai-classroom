@@ -2,7 +2,7 @@
 title: 通用代码任务 Prompt 模板
 description: 适用于「实现功能 / 修复 Bug / 重构」等常见开发任务的 Prompt 结构模板。
 author: 示例作者
-date: 2026-06-30
+date: 2026-06-01
 tags:
   - prompt
   - template

@@ -1,0 +1,646 @@
+/* VitePress default theme overrides — align with MOOC design */
+
+:root {
+  --vp-c-brand-1: var(--mooc-primary);
+  --vp-c-brand-2: var(--mooc-primary-dark);
+  --vp-c-brand-3: var(--mooc-primary-dark);
+  --vp-c-brand-soft: var(--mooc-primary-soft);
+  --vp-c-bg: var(--mooc-bg);
+  --vp-c-bg-alt: var(--mooc-surface);
+  --vp-c-bg-soft: var(--mooc-bg);
+  --vp-c-text-1: var(--mooc-text);
+  --vp-c-text-2: var(--mooc-muted);
+  --vp-c-divider: var(--mooc-border);
+  --vp-c-default-soft: var(--mooc-bg);
+  --vp-font-family-base: var(--mooc-font);
+}
+
+/* ── Site shell base ── */
+.site-shell {
+  background: var(--mooc-bg);
+  color: var(--mooc-text);
+  font-family: var(--mooc-font);
+}
+
+.site-shell .VPNav,
+.site-shell .VPLocalNav {
+  display: none !important;
+}
+
+.site-shell .VPContent {
+  padding-top: 0 !important;
+}
+
+.site-shell .VPDoc {
+  background: var(--mooc-bg);
+}
+
+.site-shell .VPFooter {
+  border-top: 1px solid var(--mooc-border);
+  background: var(--mooc-surface);
+  padding: var(--mooc-space-8) var(--mooc-space-6);
+}
+
+/* ── Article page layout ── */
+.site-shell.is-article .VPDoc {
+  padding: 0;
+}
+
+.site-shell.is-article .VPDoc .container {
+  max-width: var(--mooc-article-width);
+  margin: 0 auto;
+  padding: 0 var(--mooc-space-6);
+}
+
+.site-shell.is-article .VPDoc .content {
+  padding: var(--mooc-space-10) 0 var(--mooc-space-8);
+  max-width: none;
+  width: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* ── Article page enter transition ── */
+@keyframes article-enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes article-enter-image {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes article-enter-aside {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-shell.is-article.article-enter .article-hero-text {
+    animation: article-enter-up 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .site-shell.is-article.article-enter .article-hero-figure {
+    animation: article-enter-image 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.07s both;
+  }
+
+  .site-shell.is-article.article-enter .vp-doc {
+    animation: article-enter-up 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.11s both;
+  }
+
+  .site-shell.is-article.article-enter .VPDocAside {
+    animation: article-enter-aside 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+  }
+
+  .site-shell.is-article.article-enter .related-section {
+    animation: article-enter-up 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+  }
+}
+
+.site-shell.is-article .VPDoc.has-aside .content-container {
+  max-width: var(--mooc-article-width);
+  width: 100%;
+}
+
+.site-shell.is-article .VPDoc .article-body {
+  display: grid;
+  grid-template-columns: minmax(0, var(--mooc-prose-width)) 240px;
+  gap: var(--mooc-space-10);
+}
+
+.site-shell.is-article .VPDoc .article-body > .main {
+  align-self: start;
+}
+
+.site-shell.is-article .VPDoc .main,
+.site-shell.is-article .VPDoc .vp-doc {
+  max-width: 100%;
+  width: 100%;
+}
+
+.site-shell.is-article .VPDoc .article-toc {
+  width: 240px;
+  max-width: 240px;
+  align-self: stretch;
+}
+
+.site-shell.is-article .VPDoc .article-toc-sticky {
+  position: sticky;
+  top: calc(var(--mooc-header-height) + var(--mooc-space-4));
+}
+
+.site-shell.is-article .VPDoc .article-toc-scroll {
+  max-height: calc(100vh - var(--mooc-header-height) - var(--mooc-space-8));
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.site-shell.is-article .VPDoc .article-toc-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .site-shell.is-article .VPDoc.has-aside .container {
+    display: block;
+  }
+
+  .site-shell.is-article .VPDoc .content {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (min-width: 1440px) {
+  .site-shell.is-article .VPDoc:not(.has-sidebar) .container {
+    max-width: var(--mooc-article-width);
+  }
+}
+
+/* Hide duplicate in-doc h1 (rendered in ArticleHero) */
+.site-shell.is-article .vp-doc > h1:first-child {
+  display: none;
+}
+
+/* ── Article prose typography ── */
+.site-shell.is-article .vp-doc {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--mooc-text);
+  letter-spacing: 0.01em;
+  background: var(--mooc-surface);
+  border: 1px solid var(--mooc-border);
+  border-radius: var(--mooc-radius-lg);
+  padding: var(--mooc-space-10) var(--mooc-space-8);
+  box-shadow: var(--mooc-shadow-sm);
+}
+
+.site-shell.is-article .vp-doc > *:first-child {
+  margin-top: 0;
+}
+
+.site-shell.is-article .vp-doc h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 3em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--mooc-border);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.site-shell.is-article .vp-doc h2:first-of-type {
+  margin-top: 0;
+}
+
+.site-shell.is-article .vp-doc h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 2.25em;
+  margin-bottom: 0.75em;
+  color: var(--mooc-text);
+}
+
+.site-shell.is-article .vp-doc p {
+  margin-bottom: 1.35em;
+}
+
+.site-shell.is-article .vp-doc strong {
+  font-weight: 600;
+  color: var(--mooc-text);
+}
+
+.site-shell.is-article .vp-doc a {
+  color: var(--mooc-primary);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--mooc-primary) 30%, transparent);
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: text-decoration-color var(--mooc-duration) var(--mooc-ease);
+}
+
+.site-shell.is-article .vp-doc a:hover {
+  text-decoration-color: var(--mooc-primary);
+}
+
+/* Blockquotes — prompt callouts */
+.site-shell.is-article .vp-doc blockquote {
+  border-left: 4px solid var(--mooc-primary);
+  background: linear-gradient(90deg, var(--mooc-primary-soft) 0%, transparent 100%);
+  border-radius: 0 var(--mooc-radius-md) var(--mooc-radius-md) 0;
+  padding: 1.25em 1.5em;
+  margin: 1.75em 0;
+  color: var(--mooc-text);
+  font-size: 0.975em;
+  line-height: 1.75;
+}
+
+.site-shell.is-article .vp-doc blockquote p {
+  margin-bottom: 0.75em;
+}
+
+.site-shell.is-article .vp-doc blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Lists */
+.site-shell.is-article .vp-doc ul,
+.site-shell.is-article .vp-doc ol {
+  margin: 1.25em 0;
+  padding-left: 1.5em;
+}
+
+.site-shell.is-article .vp-doc li {
+  margin-bottom: 0.5em;
+  line-height: 1.75;
+}
+
+.site-shell.is-article .vp-doc li::marker {
+  color: var(--mooc-primary);
+}
+
+/* Horizontal rules — section dividers */
+.site-shell.is-article .vp-doc hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mooc-border) 20%, var(--mooc-border) 80%, transparent);
+  margin: 3em 0;
+}
+
+/* Images */
+.site-shell.is-article .vp-doc img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 2.5em auto;
+  border-radius: var(--mooc-radius-lg);
+  border: 1px solid var(--mooc-border);
+  box-shadow: var(--mooc-shadow-md);
+}
+
+.site-shell.is-article .vp-doc p:has(img) {
+  margin: 2.5em 0;
+}
+
+.site-shell.is-article .vp-doc p:has(img) img {
+  margin: 0 auto;
+}
+
+/* Code */
+.site-shell.is-article .vp-doc :not(pre) > code {
+  background: var(--mooc-surface);
+  border: 1px solid var(--mooc-border);
+  border-radius: 5px;
+  padding: 2px 7px;
+  font-size: 0.875em;
+  color: var(--mooc-primary-dark);
+}
+
+.site-shell.is-article .vp-doc pre {
+  border-radius: var(--mooc-radius-md);
+  border: 1px solid var(--mooc-border);
+  box-shadow: var(--mooc-shadow-sm);
+  margin: 1.75em 0;
+  font-size: 0.9em;
+  line-height: 1.65;
+}
+
+.site-shell.is-article .vp-doc div[class*='language-'] {
+  border-radius: var(--mooc-radius-md);
+  margin: 1.75em 0;
+}
+
+/* Tables */
+.site-shell.is-article .vp-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+  font-size: 0.9375rem;
+  border: 1px solid var(--mooc-border);
+  border-radius: var(--mooc-radius-md);
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.site-shell.is-article .vp-doc th,
+.site-shell.is-article .vp-doc td {
+  padding: 0.85em 1.1em;
+  border-bottom: 1px solid var(--mooc-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.site-shell.is-article .vp-doc tr:last-child th,
+.site-shell.is-article .vp-doc tr:last-child td {
+  border-bottom: none;
+}
+
+.site-shell.is-article .vp-doc th {
+  background: var(--mooc-bg);
+  font-weight: 600;
+}
+
+.site-shell.is-article .vp-doc th:first-child,
+.site-shell.is-article .vp-doc td:first-child {
+  width: 30%;
+}
+
+.site-shell.is-article .vp-doc th:last-child,
+.site-shell.is-article .vp-doc td:last-child {
+  width: 70%;
+}
+
+@media (max-width: 640px) {
+  .site-shell.is-article .vp-doc table {
+    display: block;
+    overflow-x: auto;
+    table-layout: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-shell.is-article .vp-doc th:first-child,
+  .site-shell.is-article .vp-doc td:first-child,
+  .site-shell.is-article .vp-doc th:last-child,
+  .site-shell.is-article .vp-doc td:last-child {
+    width: auto;
+    min-width: 120px;
+  }
+}
+
+/* ── Article TOC aside ── */
+.site-shell.is-article .VPDocAside {
+  width: 100%;
+}
+
+.site-shell.is-article .VPDocAsideOutline .content {
+  position: relative;
+  border-left: none;
+  padding: var(--mooc-space-4) var(--mooc-space-4) var(--mooc-space-3);
+  background: var(--mooc-bg);
+  border: 1px solid var(--mooc-border);
+  border-radius: var(--mooc-radius-md);
+  box-shadow: none;
+  font-size: var(--mooc-text-sm);
+  font-weight: 400;
+}
+
+.site-shell.is-article .VPDocAsideOutline .outline-marker {
+  display: none;
+}
+
+.site-shell.is-article .VPDocAsideOutline .outline-title {
+  line-height: 1.4;
+  font-size: var(--mooc-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--mooc-muted);
+  margin: 0 0 var(--mooc-space-3);
+  padding-bottom: var(--mooc-space-3);
+  border-bottom: 1px solid var(--mooc-border);
+}
+
+.site-shell.is-article .VPDocAsideOutline .outline-title::before {
+  content: none;
+}
+
+.site-shell.is-article .VPDocAside .VPDocOutlineItem {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-shell.is-article .VPDocAside .VPDocOutlineItem.nested {
+  padding: 0 0 0 11px;
+  margin-top: 0;
+  border-left: 1px solid var(--mooc-border);
+}
+
+.site-shell.is-article .VPDocAside .outline-link {
+  display: block;
+  position: relative;
+  padding: 5px 0 5px 12px;
+  margin: 0;
+  border-radius: 0;
+  border-left: 2px solid transparent;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--mooc-muted);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  text-decoration: none;
+  transition:
+    color var(--mooc-duration) var(--mooc-ease),
+    border-color var(--mooc-duration) var(--mooc-ease);
+}
+
+.site-shell.is-article .VPDocAside .VPDocOutlineItem.root > li > .outline-link::before {
+  content: none;
+}
+
+.site-shell.is-article .VPDocAside .VPDocOutlineItem.nested .outline-link {
+  font-size: 12px;
+  padding: 4px 0 4px 10px;
+  border-left: none;
+}
+
+.site-shell.is-article .VPDocAside .VPDocOutlineItem.nested .outline-link::before {
+  content: none;
+}
+
+.site-shell.is-article .VPDocAside .outline-link:hover {
+  color: var(--mooc-text);
+  background: transparent;
+}
+
+.site-shell.is-article .VPDocAside .outline-link.active {
+  color: var(--mooc-text);
+  font-weight: 500;
+  background: transparent;
+  border-left-color: var(--mooc-text);
+  box-shadow: none;
+}
+
+.site-shell.is-article .VPDocAside .VPDocOutlineItem.nested .outline-link.active {
+  border-left: none;
+  font-weight: 500;
+  color: var(--mooc-text);
+}
+
+.site-shell.is-article .VPDocAside .VPDocOutlineItem.nested .outline-link.active::after {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 0.72em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--mooc-text);
+  transform: translateY(-50%);
+}
+
+/* Doc footer — prev/next */
+.site-shell.is-article .VPDocFooter {
+  border-top: 1px solid var(--mooc-border);
+  padding-top: var(--mooc-space-8);
+  margin-top: var(--mooc-space-10);
+}
+
+.site-shell.is-article .VPDocFooter .pager-link {
+  border: 1px solid var(--mooc-border);
+  border-radius: var(--mooc-radius-md);
+  padding: var(--mooc-space-4) var(--mooc-space-5);
+  background: var(--mooc-surface);
+  transition: box-shadow var(--mooc-duration) var(--mooc-ease),
+    border-color var(--mooc-duration) var(--mooc-ease);
+}
+
+.site-shell.is-article .VPDocFooter .pager-link:hover {
+  box-shadow: var(--mooc-shadow-md);
+  border-color: color-mix(in srgb, var(--mooc-primary) 30%, var(--mooc-border));
+}
+
+.site-shell.is-article .VPDocFooter .pager-link .title {
+  font-weight: 600;
+  color: var(--mooc-text);
+}
+
+/* Edit link */
+.site-shell.is-article .VPDocFooter .edit-link {
+  margin-bottom: var(--mooc-space-6);
+}
+
+.site-shell.is-article .VPDocFooter .edit-link a {
+  font-size: var(--mooc-text-sm);
+  color: var(--mooc-muted);
+}
+
+/* Non-article doc pages */
+.site-shell:not(.is-article) .VPDoc .container {
+  max-width: var(--mooc-content-width);
+}
+
+.site-shell:not(.is-article) .vp-doc {
+  line-height: var(--mooc-leading-relaxed);
+  color: var(--mooc-text);
+}
+
+.site-shell:not(.is-article) .vp-doc h2 {
+  font-size: var(--mooc-text-xl);
+  font-weight: 700;
+  margin-top: 2.5em;
+  margin-bottom: 1em;
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid var(--mooc-border);
+}
+
+.site-shell:not(.is-article) .vp-doc h3 {
+  font-size: var(--mooc-text-lg);
+  font-weight: 600;
+  margin-top: 2em;
+}
+
+.site-shell:not(.is-article) .vp-doc p {
+  margin-bottom: 1.25em;
+}
+
+.site-shell:not(.is-article) .vp-doc a {
+  color: var(--mooc-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-shell:not(.is-article) .vp-doc a:hover {
+  text-decoration: underline;
+}
+
+.site-shell:not(.is-article) .vp-doc blockquote {
+  border-left: 3px solid var(--mooc-primary);
+  background: var(--mooc-primary-soft);
+  border-radius: 0 var(--mooc-radius-sm) var(--mooc-radius-sm) 0;
+  padding: 1em 1.25em;
+  margin: 1.5em 0;
+}
+
+.site-shell:not(.is-article) .vp-doc :not(pre) > code {
+  background: var(--mooc-bg);
+  border: 1px solid var(--mooc-border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.875em;
+}
+
+.site-shell:not(.is-article) .vp-doc pre {
+  border-radius: var(--mooc-radius-md);
+  border: 1px solid var(--mooc-border);
+}
+
+/* Mobile article layout */
+@media (max-width: 1279px) {
+  .site-shell.is-article .VPDoc .article-body {
+    display: block;
+  }
+
+  .site-shell.is-article .VPDoc .article-toc {
+    display: none;
+  }
+
+  .site-shell.is-article .VPDoc.has-aside .content-container {
+    max-width: 100%;
+  }
+
+  .site-shell.is-article .VPDoc .content {
+    padding: var(--mooc-space-8) 0;
+  }
+
+  .article-hero {
+    padding: var(--mooc-space-8) var(--mooc-space-5) var(--mooc-space-10);
+  }
+
+  .article-hero-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .article-hero-figure img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-shell.is-article .VPDoc .container {
+    padding: 0 var(--mooc-space-5);
+  }
+
+  .site-shell.is-article .vp-doc {
+    font-size: 1rem;
+    padding: var(--mooc-space-6) var(--mooc-space-5);
+  }
+
+  .article-hero-title {
+    font-size: 1.75rem;
+  }
+}

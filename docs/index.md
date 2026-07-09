@@ -1,4 +1,4 @@
 ---
 layout: mooc-home
-title: AI 课堂
+title: 国光量子 · AI 课堂
 ---

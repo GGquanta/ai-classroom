@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Category } from '../composables/useArticles'
+import { normalizeColor } from '../composables/useArticles'
 
 const props = defineProps<{
   categories: Category[]
@@ -33,9 +34,8 @@ const sort = computed({
 </script>
 
 <template>
-  <div class="filters">
-    <div class="filter-group">
-      <span class="filter-label">分类</span>
+  <div class="filters filters-compact">
+    <div class="filters-main">
       <div class="filter-pills">
         <button
           type="button"
@@ -51,26 +51,24 @@ const sort = computed({
           type="button"
           class="pill"
           :class="{ active: category === cat.id }"
-          :style="category === cat.id ? { backgroundColor: cat.color, borderColor: cat.color } : {}"
+          :style="
+            category === cat.id
+              ? { backgroundColor: normalizeColor(cat.color ?? '#0b5cab'), borderColor: normalizeColor(cat.color ?? '#0b5cab') }
+              : {}
+          "
           @click="category = cat.id"
         >
           {{ cat.label }}
         </button>
       </div>
-    </div>
 
-    <div class="filter-row">
-      <div class="filter-group inline">
-        <label class="filter-label" for="author-filter">作者</label>
-        <select id="author-filter" v-model="author" class="filter-select">
+      <div class="filters-side">
+        <select id="author-filter" v-model="author" class="filter-select" aria-label="按作者筛选">
           <option value="all">全部作者</option>
           <option v-for="name in authors" :key="name" :value="name">{{ name }}</option>
         </select>
-      </div>
 
-      <div class="filter-group inline">
-        <label class="filter-label" for="sort-filter">时间</label>
-        <select id="sort-filter" v-model="sort" class="filter-select">
+        <select id="sort-filter" v-model="sort" class="filter-select" aria-label="按时间排序">
           <option value="newest">最新发布</option>
           <option value="oldest">最早发布</option>
         </select>
