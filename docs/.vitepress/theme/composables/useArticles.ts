@@ -41,7 +41,7 @@ export function useArticles() {
       .replace(/\/index$/, '')
     return data.articles.find((a) => {
       const link = a.link.replace(/^\//, '')
-      return normalized.endsWith(link) || normalized === link
+      return normalized === link || normalized.endsWith(`/${link}`)
     })
   }
 
