@@ -1,14 +1,3 @@
----
-title: Cursor Skills：查找、安装、创建与常用推荐
-description: Cursor Agent Skills 的查找安装、自定义创建与常用清单。
-author: klay
-date: 2026-07-06
-tags:
-  - cursor
-  - agent-skills
-category: tools
-cover: /assets/cursor-skills/cover.png
----
 
 # Cursor Skills：查找、安装、创建与常用推荐
 

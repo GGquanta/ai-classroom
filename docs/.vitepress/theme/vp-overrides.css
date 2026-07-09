@@ -330,26 +330,46 @@
   margin: 1.75em 0;
 }
 
-/* Tables */
+/* Tables
+ * VitePress 默认 `.vp-doc table { display: block }` 便于横向滚动，
+ * 但会让 thead/tbody 按内容收缩，表格右侧留白。文章页改回 table。
+ * 视觉与代码块（pre.vp-code）对齐：白底、圆角、细边框、轻阴影。 */
 .site-shell.is-article .vp-doc table {
+  display: table;
   width: 100%;
-  border-collapse: collapse;
-  margin: 2em 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.75em 0;
   font-size: 0.9375rem;
+  background: var(--mooc-surface);
   border: 1px solid var(--mooc-border);
   border-radius: var(--mooc-radius-md);
+  box-shadow: var(--mooc-shadow-sm);
   overflow: hidden;
   table-layout: fixed;
 }
 
+/* 覆盖 VitePress 默认 tr/th/td 边框，避免与表格外框叠成 2px */
+.site-shell.is-article .vp-doc tr {
+  border-top: none;
+}
+
 .site-shell.is-article .vp-doc th,
 .site-shell.is-article .vp-doc td {
+  border: none;
   padding: 0.85em 1.1em;
   border-bottom: 1px solid var(--mooc-border);
+  border-right: 1px solid var(--mooc-border);
   text-align: left;
   vertical-align: top;
   line-height: 1.6;
   word-break: break-word;
+  background: var(--mooc-surface);
+}
+
+.site-shell.is-article .vp-doc th:last-child,
+.site-shell.is-article .vp-doc td:last-child {
+  border-right: none;
 }
 
 .site-shell.is-article .vp-doc tr:last-child th,
@@ -360,16 +380,13 @@
 .site-shell.is-article .vp-doc th {
   background: var(--mooc-bg);
   font-weight: 600;
+  color: var(--mooc-text);
 }
 
+/* 只约束首列；其余列均分剩余宽度（兼容 2/3 列） */
 .site-shell.is-article .vp-doc th:first-child,
 .site-shell.is-article .vp-doc td:first-child {
-  width: 30%;
-}
-
-.site-shell.is-article .vp-doc th:last-child,
-.site-shell.is-article .vp-doc td:last-child {
-  width: 70%;
+  width: 28%;
 }
 
 @media (max-width: 640px) {
@@ -381,9 +398,7 @@
   }
 
   .site-shell.is-article .vp-doc th:first-child,
-  .site-shell.is-article .vp-doc td:first-child,
-  .site-shell.is-article .vp-doc th:last-child,
-  .site-shell.is-article .vp-doc td:last-child {
+  .site-shell.is-article .vp-doc td:first-child {
     width: auto;
     min-width: 120px;
   }

@@ -1,14 +1,3 @@
----
-title: Cursor Rules：给 Agent 的持久化项目约定
-description: 用 .cursor/rules/ 下的 .mdc 文件为 Agent 设定项目规范，支持全局生效或按文件类型触发。
-author: klay
-date: 2026-07-06
-tags:
-  - cursor
-  - rules
-category: tools
-cover: /assets/cursor-rules/cover.png
----
 
 # Cursor Rules：给 Agent 的持久化项目约定
 
