@@ -14,6 +14,7 @@ export interface Article {
   categoryColor: string
   link: string
   cover: string | null
+  protected?: boolean
 }
 
 export interface Category {

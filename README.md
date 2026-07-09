@@ -7,7 +7,7 @@
 - **MOOC 式浏览体验**：首页卡片展示最新文章，探索页支持按分类、作者、时间筛选
 - **Markdown 投稿**：统一 frontmatter 规范，降低写作门槛
 - **自动同步**：`content/library/` → `docs/articles/` + 文章索引 JSON
-- **CI/CD**：合并至 `main` 后自动部署
+- **自动部署**：推送至 `main` 后由 Cloudflare Workers Builds 构建发布
 
 ## 项目结构
 
@@ -27,7 +27,6 @@ ai-classroom/
 ├── scripts/                 # 自动化脚本
 │   └── sync-content.mjs     # 内容同步
 ├── wrangler.jsonc           # Cloudflare Workers 部署配置
-├── .github/workflows/       # CI（PR 构建验证）
 ├── AGENTS.md                # AI 助手协作说明
 ├── CONTRIBUTING.md          # 贡献指南
 └── README.md
@@ -100,7 +99,10 @@ npm run docs:preview
    - **Production branch**：`main`
    - **Build command**：`npm run docs:build`
    - **Deploy command**：`npx wrangler deploy`（默认即可）
+   - **Environment variables**：添加 `ARTICLE_ACCESS_PASSWORD`（Encrypt，受保护文章访问密码）
 4. 保存后，推送至 `main` 将自动触发构建与部署
+
+本地开发可复制 `.env.example` 为 `.env` 并填写密码。
 
 自定义域名 `ai-classroom.qubitlab.cc` 已在 `wrangler.jsonc` 中声明；首次部署后 Cloudflare 会自动创建 DNS 记录（需 `qubitlab.cc`  zone 在同一账号下）。
 

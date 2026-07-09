@@ -16,6 +16,7 @@ author: 作者
 date: YYYY-MM-DD
 tags: []
 category: tools
+# protected: true   # 可选，需密码访问；构建时需配置 ARTICLE_ACCESS_PASSWORD
 ---
 ```
 
@@ -30,3 +31,4 @@ category: tools
 
 - 图片放 `content/assets/<slug>/`
 - 勿含敏感信息
+- `protected: true` 表示文章需密码访问（列表可见元信息，封面模糊）；构建与部署需配置 `ARTICLE_ACCESS_PASSWORD`

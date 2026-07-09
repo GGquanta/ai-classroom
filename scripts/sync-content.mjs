@@ -6,6 +6,11 @@
 import { readFile, writeFile, readdir, mkdir, rm, cp } from 'node:fs/promises'
 import { join, relative, dirname, basename, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import {
+  hashPassword,
+  encryptArticlePayload,
+  renderMarkdownToHtml,
+} from './lib/article-crypto.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
@@ -13,11 +18,22 @@ const DOCS_ARTICLES = join(ROOT, 'docs', 'articles')
 const CATEGORIES_FILE = join(ROOT, 'content', '_meta', 'categories.yaml')
 const SIDEBAR_SNIPPET = join(ROOT, 'docs', '.vitepress', 'sidebar.generated.json')
 const ARTICLES_DATA = join(ROOT, 'docs', '.vitepress', 'data', 'articles.json')
+const PROTECTED_CONTENT = join(ROOT, 'docs', '.vitepress', 'data', 'protected-content.json')
+const PROTECTED_CONFIG = join(ROOT, 'docs', '.vitepress', 'data', 'protected-config.json')
 const PUBLIC_ASSETS = join(ROOT, 'docs', 'public', 'assets')
 const ARTICLE_SOURCES = join(ROOT, 'docs', 'public', 'article-sources')
 const CONTENT_ASSETS = join(ROOT, 'content', 'assets')
 const AVATARS_ASSETS = join(CONTENT_ASSETS, 'avatars')
 const IMPORT_DIR = join(ROOT, 'import')
+
+const PROTECTED_PLACEHOLDER = `> 本文受密码保护。请在下方输入访问密码以阅读全文。
+
+`
+
+/** @param {unknown} value */
+function isProtectedFlag(value) {
+  return value === true || value === 'true'
+}
 
 /** @typedef {{ id: string, label: string, dir: string, description?: string, color?: string }} Category */
 
@@ -98,7 +114,7 @@ function parseFrontmatter(content) {
  */
 function serializeFrontmatter(meta, slug, categoryId) {
   const lines = ['---']
-  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'sidebar', 'aside']
+  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'protected', 'sidebar', 'aside']
   const merged = {
     sidebar: false,
     aside: true,
@@ -248,6 +264,11 @@ async function main() {
   const sidebar = []
   /** @type {Record<string, unknown>[]} */
   const articles = []
+  /** @type {Record<string, { iv: string, ciphertext: string, tag: string }>} */
+  const protectedContent = {}
+  let hasProtectedArticles = false
+
+  const accessPassword = process.env.ARTICLE_ACCESS_PASSWORD?.trim() || ''
 
   for (const category of categories) {
     const srcDir = join(ROOT, category.dir)
@@ -280,24 +301,47 @@ async function main() {
       const date = String(meta.date ?? '1970-01-01')
       const tags = Array.isArray(meta.tags) ? meta.tags : meta.tags ? [String(meta.tags)] : []
       const cover = meta.cover ? String(meta.cover) : null
+      const isProtected = isProtectedFlag(meta.protected)
+      const articleId = `${category.id}/${slug}`
 
-      const output = serializeFrontmatter(
-        { ...meta, title, description, author, date, tags },
-        slug,
-        category.id,
-      ) + rewrittenBody
+      if (isProtected) {
+        hasProtectedArticles = true
+        if (!accessPassword) {
+          throw new Error(
+            `文章「${title}」标记为 protected，但未设置 ARTICLE_ACCESS_PASSWORD。\n` +
+              '请在 .env 中配置密码后重试（可参考 .env.example）。',
+          )
+        }
 
-      await writeFile(join(destDir, `${slug}.md`), output, 'utf-8')
+        const html = renderMarkdownToHtml(rewrittenBody)
+        protectedContent[articleId] = encryptArticlePayload(html, rewrittenBody, accessPassword)
 
-      const sourceDir = join(ARTICLE_SOURCES, category.id)
-      await mkdir(sourceDir, { recursive: true })
-      await writeFile(join(sourceDir, `${slug}.md`), rewrittenBody, 'utf-8')
+        const output = serializeFrontmatter(
+          { ...meta, title, description, author, date, tags, protected: true },
+          slug,
+          category.id,
+        ) + PROTECTED_PLACEHOLDER
+
+        await writeFile(join(destDir, `${slug}.md`), output, 'utf-8')
+      } else {
+        const output = serializeFrontmatter(
+          { ...meta, title, description, author, date, tags },
+          slug,
+          category.id,
+        ) + rewrittenBody
+
+        await writeFile(join(destDir, `${slug}.md`), output, 'utf-8')
+
+        const sourceDir = join(ARTICLE_SOURCES, category.id)
+        await mkdir(sourceDir, { recursive: true })
+        await writeFile(join(sourceDir, `${slug}.md`), rewrittenBody, 'utf-8')
+      }
 
       const link = `/articles/${category.id}/${slug}`
       items.push({ title, slug, link })
 
       articles.push({
-        id: `${category.id}/${slug}`,
+        id: articleId,
         slug,
         title,
         description,
@@ -309,6 +353,7 @@ async function main() {
         categoryColor: stripQuotes(category.color ?? '#0b5cab'),
         link,
         cover,
+        ...(isProtected ? { protected: true } : {}),
       })
     }
 
@@ -327,6 +372,18 @@ async function main() {
   await writeFile(
     ARTICLES_DATA,
     JSON.stringify({ categories, articles, authors, authorAvatars }, null, 2) + '\n',
+    'utf-8',
+  )
+  await writeFile(PROTECTED_CONTENT, JSON.stringify(protectedContent, null, 2) + '\n', 'utf-8')
+  await writeFile(
+    PROTECTED_CONFIG,
+    JSON.stringify(
+      {
+        passwordHash: hasProtectedArticles ? hashPassword(accessPassword) : '',
+      },
+      null,
+      2,
+    ) + '\n',
     'utf-8',
   )
   await writeFile(SIDEBAR_SNIPPET, JSON.stringify(sidebar, null, 2) + '\n', 'utf-8')

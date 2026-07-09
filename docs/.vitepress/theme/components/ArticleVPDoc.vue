@@ -5,10 +5,24 @@ import { useData } from 'vitepress/dist/client/theme-default/composables/data'
 import { useSidebar } from 'vitepress/dist/client/theme-default/composables/sidebar'
 import VPDocAside from 'vitepress/dist/client/theme-default/components/VPDocAside.vue'
 import VPDocFooter from 'vitepress/dist/client/theme-default/components/VPDocFooter.vue'
+import { useArticles } from '../composables/useArticles'
+import { useArticleAccess } from '../composables/useArticleAccess'
+import ArticlePasswordGate from './ArticlePasswordGate.vue'
 
-const { theme } = useData()
+const { theme, page } = useData()
 const route = useRoute()
 const { hasSidebar, hasAside } = useSidebar()
+const { getByLink } = useArticles()
+const { isProtectedArticle, isUnlocked, getDecryptedHtml } = useArticleAccess()
+
+const article = computed(() => getByLink(page.value.relativePath))
+const isProtected = computed(() => !!article.value && isProtectedArticle(article.value))
+const showGate = computed(() => isProtected.value && !isUnlocked.value)
+const showDecrypted = computed(() => isProtected.value && isUnlocked.value)
+const decryptedHtml = computed(() => {
+  if (!article.value || !isUnlocked.value) return ''
+  return getDecryptedHtml(article.value.id) ?? ''
+})
 
 const pageName = computed(() =>
   route.path.replace(/[./]+/g, '_').replace(/_html$/, ''),
@@ -18,16 +32,29 @@ const pageName = computed(() =>
 <template>
   <div
     class="VPDoc"
-    :class="{ 'has-sidebar': hasSidebar, 'has-aside': hasAside }"
+    :class="{ 'has-sidebar': hasSidebar, 'has-aside': hasAside && !showGate }"
   >
     <slot name="doc-top" />
     <div class="container">
       <div class="content">
         <div class="content-container">
           <slot name="doc-before" />
-          <div v-if="hasAside" class="article-body">
+
+          <ArticlePasswordGate v-if="showGate" />
+
+          <div v-else-if="hasAside" class="article-body">
             <main class="main">
+              <div
+                v-if="showDecrypted"
+                class="vp-doc protected-article-content"
+                :class="[
+                  pageName,
+                  theme.externalLinkIcon && 'external-link-icon-enabled',
+                ]"
+                v-html="decryptedHtml"
+              />
               <Content
+                v-else
                 class="vp-doc"
                 :class="[
                   pageName,
@@ -39,19 +66,29 @@ const pageName = computed(() =>
               <div class="article-toc-sticky">
                 <div class="article-toc-scroll">
                   <VPDocAside>
-                  <template #aside-top><slot name="aside-top" /></template>
-                  <template #aside-bottom><slot name="aside-bottom" /></template>
-                  <template #aside-outline-before><slot name="aside-outline-before" /></template>
-                  <template #aside-outline-after><slot name="aside-outline-after" /></template>
-                  <template #aside-ads-before><slot name="aside-ads-before" /></template>
-                  <template #aside-ads-after><slot name="aside-ads-after" /></template>
-                </VPDocAside>
+                    <template #aside-top><slot name="aside-top" /></template>
+                    <template #aside-bottom><slot name="aside-bottom" /></template>
+                    <template #aside-outline-before><slot name="aside-outline-before" /></template>
+                    <template #aside-outline-after><slot name="aside-outline-after" /></template>
+                    <template #aside-ads-before><slot name="aside-ads-before" /></template>
+                    <template #aside-ads-after><slot name="aside-ads-after" /></template>
+                  </VPDocAside>
                 </div>
               </div>
             </aside>
           </div>
           <main v-else class="main">
+            <div
+              v-if="showDecrypted"
+              class="vp-doc protected-article-content"
+              :class="[
+                pageName,
+                theme.externalLinkIcon && 'external-link-icon-enabled',
+              ]"
+              v-html="decryptedHtml"
+            />
             <Content
+              v-else
               class="vp-doc"
               :class="[
                 pageName,
@@ -59,6 +96,7 @@ const pageName = computed(() =>
               ]"
             />
           </main>
+
           <VPDocFooter>
             <template #doc-footer-before><slot name="doc-footer-before" /></template>
           </VPDocFooter>

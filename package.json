@@ -5,13 +5,14 @@
   "description": "团队 AI 协同办公与开发经验知识分享站点",
   "type": "module",
   "scripts": {
-    "sync": "node scripts/sync-content.mjs",
+    "sync": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/sync-content.mjs",
     "docs:dev": "npm run sync && vitepress dev docs",
     "docs:build": "npm run sync && vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "deploy": "npm run docs:build && wrangler deploy"
   },
   "devDependencies": {
+    "markdown-it": "^14.3.0",
     "vitepress": "^1.6.3",
     "wrangler": "^4.107.1"
   },

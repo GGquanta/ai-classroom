@@ -543,11 +543,16 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s var(--mooc-ease);
+  transition: transform 0.3s var(--mooc-ease), filter 0.3s var(--mooc-ease);
 }
 
-.article-card:hover .card-cover img {
-  transform: scale(1.03);
+.card-cover.is-protected img {
+  filter: blur(10px);
+  transform: scale(1.05);
+}
+
+.article-card:hover .card-cover.is-protected img {
+  transform: scale(1.05);
 }
 
 .card-body {
@@ -977,6 +982,115 @@
   width: 100%;
   aspect-ratio: 21 / 9;
   object-fit: cover;
+  transition: filter 0.3s var(--mooc-ease);
+}
+
+.article-hero-figure.is-protected img {
+  filter: blur(12px);
+  transform: scale(1.04);
+}
+
+/* ── Protected article password gate ── */
+.article-password-gate {
+  padding: var(--mooc-space-8) 0 var(--mooc-space-10);
+}
+
+.article-password-card {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: var(--mooc-space-8);
+  text-align: center;
+  background: var(--mooc-surface);
+  border: 1px solid var(--mooc-border);
+  border-radius: var(--mooc-radius-lg);
+  box-shadow: var(--mooc-shadow-md);
+}
+
+.article-password-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--mooc-space-4);
+  color: var(--mooc-primary);
+  background: var(--mooc-primary-soft);
+  border-radius: var(--mooc-radius-full);
+}
+
+.article-password-title {
+  margin: 0 0 var(--mooc-space-2);
+  font-size: var(--mooc-text-xl);
+  font-weight: 700;
+  color: var(--mooc-text);
+}
+
+.article-password-lead {
+  margin: 0 0 var(--mooc-space-5);
+  color: var(--mooc-text-muted);
+  font-size: var(--mooc-text-sm);
+}
+
+.article-password-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mooc-space-3);
+}
+
+.article-password-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: var(--mooc-text-base);
+  border: 1px solid var(--mooc-border);
+  border-radius: var(--mooc-radius-md);
+  background: var(--mooc-bg);
+  color: var(--mooc-text);
+}
+
+.article-password-input:focus {
+  outline: 2px solid color-mix(in srgb, var(--mooc-primary) 35%, transparent);
+  border-color: var(--mooc-primary);
+}
+
+.article-password-submit {
+  width: 100%;
+}
+
+.article-password-error {
+  margin: var(--mooc-space-4) 0 0;
+  color: #c0392b;
+  font-size: var(--mooc-text-sm);
+}
+
+.article-password-hint {
+  margin: var(--mooc-space-5) 0 0;
+  font-size: var(--mooc-text-sm);
+  color: var(--mooc-text-muted);
+  line-height: 1.6;
+}
+
+.article-password-hint a {
+  color: var(--mooc-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.protected-article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--mooc-radius-md);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @media (max-width: 768px) {

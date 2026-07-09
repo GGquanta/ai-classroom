@@ -1,10 +1,24 @@
 import { zip } from 'fflate'
 import type { Article } from './useArticles'
 import { formatDate } from './useArticles'
+import { useArticleAccess } from './useArticleAccess'
 
 const SITE_ORIGIN = 'https://ai-classroom.qubitlab.cc'
 
 export async function fetchArticleBody(article: Article): Promise<string> {
+  const { isProtectedArticle, isUnlocked, getDecryptedMarkdown } = useArticleAccess()
+
+  if (isProtectedArticle(article)) {
+    if (!isUnlocked.value) {
+      throw new Error('请先输入访问密码后再导出')
+    }
+    const markdown = getDecryptedMarkdown(article.id)
+    if (!markdown) {
+      throw new Error('无法加载文章内容')
+    }
+    return markdown
+  }
+
   const url = `/article-sources/${article.category}/${article.slug}.md`
   const res = await fetch(url)
   if (!res.ok) {

@@ -10,6 +10,7 @@ tags:
   - hmi
 category: cases
 cover: /assets/cursor-quantum-radar-sim/web-hmi-screenshot.png
+protected: true
 ---
 
 # 用 Cursor 打造光量子雷达仿真转台系统

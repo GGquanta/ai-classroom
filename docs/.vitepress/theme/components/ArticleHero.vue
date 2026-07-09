@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { useData } from 'vitepress'
 import { IconUser, IconCalendar, IconChevronRight, IconCopy, IconDownload } from '@tabler/icons-vue'
 import { useArticles, formatDate, normalizeColor, getArticleCover, getAuthorAvatar } from '../composables/useArticles'
+import { useArticleAccess } from '../composables/useArticleAccess'
 import {
   fetchArticleBody,
   buildPrompt,
@@ -13,8 +14,11 @@ import {
 
 const { page, frontmatter } = useData()
 const { getByLink } = useArticles()
+const { isProtectedArticle, isUnlocked } = useArticleAccess()
 
 const article = computed(() => getByLink(page.value.relativePath))
+const isProtected = computed(() => !!article.value && isProtectedArticle(article.value))
+const canExport = computed(() => !isProtected.value || isUnlocked.value)
 
 const categoryColor = computed(() =>
   article.value ? normalizeColor(article.value.categoryColor) : '#0b5cab',
@@ -99,6 +103,7 @@ async function handleDownloadSkill() {
           <h1 class="article-hero-title">{{ frontmatter.title ?? article.title }}</h1>
           <div class="article-hero-actions" role="group" aria-label="文章导出">
             <button
+              v-if="canExport"
               type="button"
               class="btn article-hero-btn article-hero-btn-copy"
               :disabled="copying || downloading"
@@ -108,6 +113,7 @@ async function handleDownloadSkill() {
               {{ copied ? '已复制' : copying ? '复制中…' : '复制为提示词' }}
             </button>
             <button
+              v-if="canExport"
               type="button"
               class="btn article-hero-btn article-hero-btn-skill"
               :disabled="copying || downloading"
@@ -148,7 +154,7 @@ async function handleDownloadSkill() {
         </div>
       </div>
 
-      <figure class="article-hero-figure">
+      <figure class="article-hero-figure" :class="{ 'is-protected': isProtected && !isUnlocked }">
         <img :src="coverSrc" :alt="article.title" />
       </figure>
     </div>

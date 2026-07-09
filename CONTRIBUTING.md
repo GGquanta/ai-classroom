@@ -76,8 +76,8 @@ npm run docs:dev
 ## 审核流程
 
 1. 维护者检查格式与敏感信息
-2. CI 自动运行 `npm run docs:build` 验证构建
-3. 审核通过后合并，站点自动部署
+2. 维护者验证 `npm run docs:build` 可正常构建
+3. 审核通过后合并至 `main`，由 Cloudflare Workers Builds 自动部署
 
 ## 问题反馈
 

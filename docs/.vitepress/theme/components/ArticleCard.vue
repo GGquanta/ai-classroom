@@ -19,7 +19,7 @@ const coverSrc = computed(() => getArticleCover(props.article))
     class="article-card"
     :class="{ 'is-active': route.path === article.link, 'is-compact': compact }"
   >
-    <div class="card-cover">
+    <div class="card-cover" :class="{ 'is-protected': article.protected }">
       <img :src="coverSrc" :alt="article.title" loading="lazy" />
     </div>
     <div class="card-body">
