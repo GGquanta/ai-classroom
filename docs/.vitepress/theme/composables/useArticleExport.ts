@@ -2,8 +2,7 @@ import { zip } from 'fflate'
 import type { Article } from './useArticles'
 import { formatDate } from './useArticles'
 import { useArticleAccess } from './useArticleAccess'
-
-const SITE_ORIGIN = 'https://ai-classroom.qubitlab.cc'
+import { SITE_ORIGIN } from './siteOrigin'
 
 export async function fetchArticleBody(article: Article): Promise<string> {
   const { isProtectedArticle, isUnlocked, getDecryptedMarkdown } = useArticleAccess()

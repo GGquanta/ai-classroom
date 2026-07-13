@@ -4,7 +4,7 @@ import { Content, useRoute } from 'vitepress'
 import { useData } from 'vitepress/dist/client/theme-default/composables/data'
 import { useSidebar } from 'vitepress/dist/client/theme-default/composables/sidebar'
 import VPDocAside from 'vitepress/dist/client/theme-default/components/VPDocAside.vue'
-import VPDocFooter from 'vitepress/dist/client/theme-default/components/VPDocFooter.vue'
+import ArticleVPDocFooter from './ArticleVPDocFooter.vue'
 import { useArticles } from '../composables/useArticles'
 import { useArticleAccess } from '../composables/useArticleAccess'
 import ArticlePasswordGate from './ArticlePasswordGate.vue'
@@ -97,9 +97,9 @@ const pageName = computed(() =>
             />
           </main>
 
-          <VPDocFooter>
+          <ArticleVPDocFooter>
             <template #doc-footer-before><slot name="doc-footer-before" /></template>
-          </VPDocFooter>
+          </ArticleVPDocFooter>
           <slot name="doc-after" />
         </div>
       </div>

@@ -41,6 +41,11 @@ export default defineConfig({
       text: '在 GitHub 上编辑此页',
     },
 
+    feedbackLink: {
+      url: 'https://docs.qq.com/form/page/DTHBuakhMQktId1Zv?layoutKey=formmix&templateId=wr44u6anof8m3k1tmw4bnfb3uw&create_type=2&no_promotion=1&is_blank_or_template=template',
+      text: '向 AI 课堂进行反馈和投稿',
+    },
+
     footer: {
       message: '国光量子 · AI 课堂 · MIT License',
       copyright: 'Copyright © 国光量子 · AI 课堂贡献者',

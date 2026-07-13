@@ -111,6 +111,10 @@
     animation: article-enter-aside 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
   }
 
+  .site-shell.is-article.article-enter .VPDocFooter .article-share-link {
+    animation: article-enter-up 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+  }
+
   .site-shell.is-article.article-enter .related-section {
     animation: article-enter-up 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
   }
@@ -543,14 +547,59 @@
   color: var(--mooc-text);
 }
 
-/* Edit link */
-.site-shell.is-article .VPDocFooter .edit-link {
+/* Edit / feedback / share links */
+.site-shell.is-article .VPDocFooter .edit-links {
   margin-bottom: var(--mooc-space-6);
 }
 
-.site-shell.is-article .VPDocFooter .edit-link a {
-  font-size: var(--mooc-text-sm);
-  color: var(--mooc-muted);
+.site-shell.is-article .VPDocFooter .edit-link a.edit-link-button,
+.site-shell.is-article .VPDocFooter .feedback-link a.edit-link-button,
+.site-shell.is-article .VPDocFooter .article-share-link a.edit-link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-brand-1);
+  transition: color 0.25s;
+}
+
+.site-shell.is-article .VPDocFooter .edit-link a.edit-link-button:hover,
+.site-shell.is-article .VPDocFooter .feedback-link a.edit-link-button:hover,
+.site-shell.is-article .VPDocFooter .article-share-link a.edit-link-button:hover {
+  color: var(--vp-c-brand-2);
+}
+
+.site-shell.is-article .VPDocFooter .edit-link .edit-link-icon,
+.site-shell.is-article .VPDocFooter .feedback-link .edit-link-icon,
+.site-shell.is-article .VPDocFooter .article-share-link .edit-link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.site-shell.is-article .VPDocFooter .article-share-link .edit-link-icon svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.site-shell.is-article .VPDocFooter .article-share-link a.edit-link-button[aria-disabled='true'] {
+  opacity: 0.65;
+  pointer-events: none;
+  cursor: default;
+}
+
+.site-shell.is-article .VPDocFooter .article-share-link a.edit-link-button[aria-disabled='true']:hover {
+  color: var(--vp-c-brand-1);
 }
 
 /* Non-article doc pages */

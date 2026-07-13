@@ -1130,7 +1130,101 @@
   }
 }
 
-/* Related articles */
+/* Article share (inside edit-info) */
+.site-shell.is-article .VPDocFooter .article-share {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: var(--mooc-space-4);
+}
+
+.site-shell.is-article .VPDocFooter .article-share-loading {
+  align-items: flex-start;
+}
+
+.site-shell.is-article .VPDocFooter .article-share-preview-btn {
+  align-items: flex-start;
+}
+
+.article-share-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--mooc-space-4);
+  color: var(--mooc-muted);
+  font-size: var(--mooc-text-sm);
+}
+
+.article-share-skeleton {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 672 / 288;
+  border-radius: var(--mooc-radius-lg);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--mooc-border) 70%, transparent) 0%,
+    color-mix(in srgb, var(--mooc-border) 35%, transparent) 50%,
+    color-mix(in srgb, var(--mooc-border) 70%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  animation: article-share-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes article-share-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.article-share-error {
+  margin: 0;
+  color: #b42318;
+  font-size: var(--mooc-text-sm);
+}
+
+.article-share-retry {
+  margin-left: var(--mooc-space-2);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--mooc-primary);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.article-share-preview-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--mooc-space-3);
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.article-share-preview {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: var(--mooc-radius-lg);
+  box-shadow: var(--mooc-shadow-md);
+  transition: transform var(--mooc-duration) var(--mooc-ease), box-shadow var(--mooc-duration) var(--mooc-ease);
+}
+
+.article-share-preview-btn:hover .article-share-preview,
+.article-share-preview-btn:focus-visible .article-share-preview {
+  transform: translateY(-2px);
+  box-shadow: var(--mooc-shadow-lg);
+}
+
 .related-section {
   max-width: var(--mooc-article-width);
   margin: 0 auto;
