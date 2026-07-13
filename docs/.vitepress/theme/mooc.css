@@ -339,13 +339,13 @@
 .section-topics {
   background: var(--mooc-bg);
   border-top: 1px solid var(--mooc-border);
-  padding-bottom: var(--mooc-space-6);
+  padding: var(--mooc-space-12) var(--mooc-space-6);
 }
 
 .section-community {
   background: var(--mooc-surface);
   border-top: 1px solid var(--mooc-border);
-  padding-top: var(--mooc-space-6);
+  padding: var(--mooc-space-12) var(--mooc-space-6);
 }
 
 .community-banner {
@@ -1587,11 +1587,11 @@
   }
 
   .section-topics {
-    padding-bottom: var(--mooc-space-5);
+    padding: var(--mooc-space-8) var(--mooc-space-5);
   }
 
   .section-community {
-    padding-top: var(--mooc-space-5);
+    padding: var(--mooc-space-8) var(--mooc-space-5);
   }
 
   .section-head {

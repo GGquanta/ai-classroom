@@ -11,11 +11,13 @@ import CategoryIcon from './CategoryIcon.vue'
 import { useArticles } from '../composables/useArticles'
 import type { Article } from '../composables/useArticles'
 
+const FEATURED_COUNT = 8
+
 const { categories, recent, random } = useArticles()
-const featuredArticles = ref<Article[]>(recent(4))
+const featuredArticles = ref<Article[]>(recent(FEATURED_COUNT))
 
 onMounted(() => {
-  featuredArticles.value = random(4)
+  featuredArticles.value = random(FEATURED_COUNT)
 })
 </script>
 
