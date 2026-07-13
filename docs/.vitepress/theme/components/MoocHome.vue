@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { IconChevronRight } from '@tabler/icons-vue'
+import { IconChevronRight, IconMessageCircle, IconPencil } from '@tabler/icons-vue'
+
+const FEEDBACK_FORM_URL =
+  'https://docs.qq.com/form/page/DTHBuakhMQktId1Zv?layoutKey=formmix&templateId=wr44u6anof8m3k1tmw4bnfb3uw&create_type=2&no_promotion=1&is_blank_or_template=template'
 import MoocHeader from './MoocHeader.vue'
 import MoocFooter from './MoocFooter.vue'
 import ArticleGrid from './ArticleGrid.vue'
@@ -90,6 +93,48 @@ onMounted(() => {
             </div>
             <IconChevronRight class="topic-arrow" :size="20" :stroke="1.75" aria-hidden="true" />
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-community">
+      <div class="section-inner fade-in">
+        <div class="community-banner">
+          <div class="community-banner-glow" aria-hidden="true" />
+          <div class="community-copy">
+            <p class="community-eyebrow">一起共建</p>
+            <h2>分享经验，让课堂更贴近你的需求</h2>
+            <p>
+              无论是想投稿一篇实践复盘、反馈某篇文章的质量，还是告诉我们还缺哪类主题——都欢迎通过问卷与我们交流，你的声音会直接参与内容规划。
+            </p>
+          </div>
+          <div class="community-actions">
+            <a
+              :href="FEEDBACK_FORM_URL"
+              class="community-card community-card-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="community-card-icon" aria-hidden="true">
+                <IconMessageCircle :size="24" :stroke="1.75" />
+              </span>
+              <span class="community-card-body">
+                <strong>意见反馈</strong>
+                <span>填写问卷，向我们提供宝贵意见</span>
+              </span>
+              <IconChevronRight class="community-card-arrow" :size="20" :stroke="1.75" aria-hidden="true" />
+            </a>
+            <a href="/guide/contributing" class="community-card">
+              <span class="community-card-icon" aria-hidden="true">
+                <IconPencil :size="24" :stroke="1.75" />
+              </span>
+              <span class="community-card-body">
+                <strong>参与投稿</strong>
+                <span>查看投稿规范，分享你的 AI 协同实践经验</span>
+              </span>
+              <IconChevronRight class="community-card-arrow" :size="20" :stroke="1.75" aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

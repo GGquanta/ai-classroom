@@ -338,6 +338,164 @@
 
 .section-topics {
   background: var(--mooc-bg);
+  border-top: 1px solid var(--mooc-border);
+  padding-bottom: var(--mooc-space-6);
+}
+
+.section-community {
+  background: var(--mooc-surface);
+  border-top: 1px solid var(--mooc-border);
+  padding-top: var(--mooc-space-6);
+}
+
+.community-banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: var(--mooc-space-8);
+  align-items: center;
+  padding: var(--mooc-space-8);
+  border-radius: calc(var(--mooc-radius-lg) + 4px);
+  border: 1px solid color-mix(in srgb, var(--mooc-primary) 18%, var(--mooc-border));
+  background:
+    radial-gradient(ellipse 70% 90% at 0% 50%, rgba(11, 92, 171, 0.1) 0%, transparent 62%),
+    linear-gradient(135deg, #ffffff 0%, #f6f9fd 52%, #eef4fb 100%);
+  box-shadow: var(--mooc-shadow-md);
+  overflow: hidden;
+}
+
+.community-banner-glow {
+  position: absolute;
+  top: -40%;
+  right: -8%;
+  width: min(420px, 55%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(11, 92, 171, 0.14) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.community-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.community-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 var(--mooc-space-2);
+  padding: 6px 12px;
+  border-radius: var(--mooc-radius-full);
+  background: var(--mooc-primary-soft);
+  color: var(--mooc-primary);
+  font-size: var(--mooc-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.community-copy h2 {
+  margin: 0 0 var(--mooc-space-3);
+  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: var(--mooc-leading-tight);
+}
+
+.community-copy p:not(.community-eyebrow) {
+  margin: 0;
+  color: var(--mooc-muted);
+  font-size: var(--mooc-text-sm);
+  line-height: var(--mooc-leading-relaxed);
+  max-width: 42ch;
+}
+
+.community-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mooc-space-4);
+}
+
+.community-card {
+  display: flex;
+  align-items: center;
+  gap: var(--mooc-space-4);
+  padding: var(--mooc-space-5);
+  border-radius: var(--mooc-radius-lg);
+  border: 1px solid var(--mooc-border);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(8px);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform var(--mooc-duration) var(--mooc-ease),
+    box-shadow var(--mooc-duration) var(--mooc-ease),
+    border-color var(--mooc-duration) var(--mooc-ease),
+    background var(--mooc-duration) var(--mooc-ease);
+}
+
+.community-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--mooc-shadow-md);
+  border-color: color-mix(in srgb, var(--mooc-primary) 28%, var(--mooc-border));
+  background: #fff;
+}
+
+.community-card-primary {
+  border-color: color-mix(in srgb, var(--mooc-primary) 24%, var(--mooc-border));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(11, 92, 171, 0.06) 100%);
+}
+
+.community-card-primary:hover {
+  border-color: color-mix(in srgb, var(--mooc-primary) 42%, var(--mooc-border));
+  box-shadow: 0 8px 28px rgba(11, 92, 171, 0.12);
+}
+
+.community-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--mooc-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--mooc-primary);
+  background: var(--mooc-primary-soft);
+  border: 1px solid color-mix(in srgb, var(--mooc-primary) 18%, var(--mooc-border));
+}
+
+.community-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.community-card-body strong {
+  font-size: var(--mooc-text-base);
+  font-weight: 700;
+}
+
+.community-card-body span {
+  color: var(--mooc-muted);
+  font-size: var(--mooc-text-xs);
+  line-height: var(--mooc-leading-normal);
+}
+
+.community-card-arrow {
+  flex-shrink: 0;
+  color: var(--mooc-muted);
+  transition:
+    transform var(--mooc-duration) var(--mooc-ease),
+    color var(--mooc-duration) var(--mooc-ease);
+}
+
+.community-card:hover .community-card-arrow {
+  transform: translateX(3px);
+  color: var(--mooc-primary);
 }
 
 .section-inner {
@@ -417,6 +575,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--mooc-space-4);
+  align-items: start;
 }
 
 .topic-card {
@@ -429,7 +588,6 @@
   border-radius: var(--mooc-radius-lg);
   text-decoration: none;
   color: inherit;
-  min-height: 120px;
   transition: box-shadow var(--mooc-duration) var(--mooc-ease),
     transform var(--mooc-duration) var(--mooc-ease),
     border-color var(--mooc-duration) var(--mooc-ease);
@@ -1373,6 +1531,15 @@
 }
 
 @media (max-width: 1024px) {
+  .community-banner {
+    grid-template-columns: 1fr;
+    gap: var(--mooc-space-6);
+  }
+
+  .community-copy p:not(.community-eyebrow) {
+    max-width: none;
+  }
+
   .topic-strip {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1419,6 +1586,14 @@
     padding: var(--mooc-space-8) var(--mooc-space-5);
   }
 
+  .section-topics {
+    padding-bottom: var(--mooc-space-5);
+  }
+
+  .section-community {
+    padding-top: var(--mooc-space-5);
+  }
+
   .section-head {
     flex-direction: column;
     align-items: flex-start;
@@ -1426,6 +1601,14 @@
 
   .topic-strip {
     grid-template-columns: 1fr;
+  }
+
+  .community-banner {
+    padding: var(--mooc-space-6);
+  }
+
+  .community-card {
+    align-items: flex-start;
   }
 
   .article-grid {
