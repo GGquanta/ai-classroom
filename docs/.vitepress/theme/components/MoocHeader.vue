@@ -3,17 +3,35 @@ import { computed, ref } from 'vue'
 import { useRoute } from 'vitepress'
 import { IconSearch, IconMenu2, IconX } from '@tabler/icons-vue'
 import MoocSearch from './MoocSearch.vue'
+import { useFavorites } from '../composables/useFavorites'
 
 const route = useRoute()
 const menuOpen = ref(false)
 const searchRef = ref<InstanceType<typeof MoocSearch> | null>(null)
+const { count } = useFavorites()
 
-const navItems = [
-  { href: '/', label: '首页', match: (path: string) => path === '/' || path === '/index.html' },
-  { href: '/explore', label: '探索文章', match: (path: string) => path.startsWith('/explore') },
-  { href: '/guide/contributing', label: '投稿说明', match: (path: string) => path.startsWith('/guide') },
-  { href: '/about', label: '关于本页面', match: (path: string) => path.startsWith('/about') },
-]
+const navItems = computed(() => {
+  const items = [
+    { href: '/', label: '首页', match: (path: string) => path === '/' || path === '/index.html' },
+    { href: '/explore', label: '探索文章', match: (path: string) => path.startsWith('/explore') },
+  ]
+
+  if (count.value > 0) {
+    items.push({
+      href: '/favorites',
+      label: '我的收藏',
+      match: (path: string) => path.startsWith('/favorites'),
+    })
+  }
+
+  items.push({
+    href: '/guide/contributing',
+    label: '投稿说明',
+    match: (path: string) => path.startsWith('/guide'),
+  })
+
+  return items
+})
 
 function isActive(match: (path: string) => boolean) {
   return match(route.path)

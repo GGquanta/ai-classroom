@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useData } from 'vitepress'
-import { IconUser, IconCalendar, IconChevronRight, IconCopy, IconDownload } from '@tabler/icons-vue'
+import { IconUser, IconCalendar, IconChevronRight, IconCopy, IconDownload, IconStar, IconStarFilled } from '@tabler/icons-vue'
 import { useArticles, formatDate, normalizeColor, getArticleCover, getAuthorAvatar } from '../composables/useArticles'
 import { useArticleAccess } from '../composables/useArticleAccess'
+import { useFavorites } from '../composables/useFavorites'
 import {
   fetchArticleBody,
   buildPrompt,
@@ -15,6 +16,7 @@ import {
 const { page, frontmatter } = useData()
 const { getByLink } = useArticles()
 const { isProtectedArticle, isUnlocked } = useArticleAccess()
+const { isFavorite, toggle } = useFavorites()
 
 const article = computed(() => getByLink(page.value.relativePath))
 const isProtected = computed(() => !!article.value && isProtectedArticle(article.value))
@@ -29,6 +31,13 @@ const coverSrc = computed(() => (article.value ? getArticleCover(article.value) 
 const authorAvatar = computed(() =>
   article.value ? getAuthorAvatar(article.value.author) : null,
 )
+
+const favorited = computed(() => (article.value ? isFavorite(article.value.id) : false))
+
+function handleToggleFavorite() {
+  if (!article.value) return
+  toggle(article.value.id)
+}
 
 const copying = ref(false)
 const copied = ref(false)
@@ -86,17 +95,32 @@ async function handleDownloadSkill() {
             <a :href="`/explore?category=${article.category}`">{{ article.categoryLabel }}</a>
           </nav>
 
-          <a
-            :href="`/explore?category=${article.category}`"
-            class="hero-category-pill"
-            :style="{
-              color: categoryColor,
-              backgroundColor: `color-mix(in srgb, ${categoryColor} 12%, transparent)`,
-              borderColor: `color-mix(in srgb, ${categoryColor} 25%, transparent)`,
-            }"
-          >
-            {{ article.categoryLabel }}
-          </a>
+          <div class="article-hero-intro-row">
+            <a
+              :href="`/explore?category=${article.category}`"
+              class="hero-category-pill"
+              :style="{
+                color: categoryColor,
+                backgroundColor: `color-mix(in srgb, ${categoryColor} 12%, transparent)`,
+                borderColor: `color-mix(in srgb, ${categoryColor} 25%, transparent)`,
+              }"
+            >
+              {{ article.categoryLabel }}
+            </a>
+
+            <button
+              type="button"
+              class="hero-favorite-btn"
+              :class="{ 'is-active': favorited }"
+              :aria-pressed="favorited"
+              :aria-label="favorited ? '取消收藏' : '收藏文章'"
+              @click="handleToggleFavorite"
+            >
+              <IconStarFilled v-if="favorited" :size="16" :stroke="0" aria-hidden="true" />
+              <IconStar v-else :size="16" :stroke="1.75" aria-hidden="true" />
+              <span>{{ favorited ? '已收藏' : '收藏' }}</span>
+            </button>
+          </div>
         </div>
 
         <div class="article-hero-title-band">

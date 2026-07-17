@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useData } from 'vitepress'
 import MoocHome from './components/MoocHome.vue'
 import ArticlesExplore from './components/ArticlesExplore.vue'
+import ArticlesFavorites from './components/ArticlesFavorites.vue'
 import ArticleHero from './components/ArticleHero.vue'
 import RelatedArticles from './components/RelatedArticles.vue'
 import MoocHeader from './components/MoocHeader.vue'
@@ -22,6 +23,7 @@ const { enterActive } = useArticleEnter(isArticlePage)
 <template>
   <MoocHome v-if="frontmatter.layout === 'mooc-home'" />
   <ArticlesExplore v-else-if="frontmatter.layout === 'articles-explore'" />
+  <ArticlesFavorites v-else-if="frontmatter.layout === 'articles-favorites'" />
   <div
     v-else
     class="site-shell"

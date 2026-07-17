@@ -1047,6 +1047,50 @@
   opacity: 0.85;
 }
 
+.article-hero-intro-row {
+  display: flex;
+  align-items: center;
+  gap: var(--mooc-space-2);
+}
+
+.hero-favorite-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--mooc-border);
+  border-radius: var(--mooc-radius-full);
+  background: var(--mooc-surface);
+  color: var(--mooc-muted);
+  font-size: var(--mooc-text-xs);
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color var(--mooc-duration) var(--mooc-ease),
+    border-color var(--mooc-duration) var(--mooc-ease),
+    background-color var(--mooc-duration) var(--mooc-ease);
+}
+
+.hero-favorite-btn:hover {
+  color: var(--mooc-accent);
+  border-color: color-mix(in srgb, var(--mooc-accent) 35%, transparent);
+  background: color-mix(in srgb, var(--mooc-accent) 8%, transparent);
+}
+
+.hero-favorite-btn.is-active {
+  color: #d4a017;
+  border-color: color-mix(in srgb, #d4a017 35%, transparent);
+  background: color-mix(in srgb, #d4a017 12%, transparent);
+}
+
+.hero-favorite-btn.is-active:hover {
+  color: #b8890f;
+  border-color: color-mix(in srgb, #b8890f 40%, transparent);
+  background: color-mix(in srgb, #b8890f 16%, transparent);
+}
+
 .article-hero-title {
   font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 800;

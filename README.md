@@ -1,6 +1,6 @@
 # AI 课堂
 
-团队 **AI 协同办公、开发赋能与工具使用** 经验的知识分享站点。成员在 `content/` 目录投稿 Markdown 资料，经审核后自动构建为静态网站并发布至 [https://ai-classroom.qubitlab.cc](https://ai-classroom.qubitlab.cc)（Cloudflare Workers + 自定义域名）。
+团队 **AI 协同办公、开发赋能与工具使用** 经验的知识分享站点。成员通过 Pull Request 在 `import/` 目录投稿，维护者整理至 `content/library/` 后自动构建为静态网站并发布至 [https://ai-classroom.qubitlab.cc](https://ai-classroom.qubitlab.cc)（Cloudflare Workers + 自定义域名）。
 
 ## 功能特性
 
@@ -13,7 +13,8 @@
 
 ```
 ai-classroom/
-├── content/                 # 内容源（投稿入口）
+├── import/                  # 投稿入口（按作者分子目录，PR 放这里）
+├── content/                 # 内容源（维护者整理后的正式稿）
 │   ├── _meta/               # 分类配置
 │   ├── inbox/               # 待审核投稿
 │   ├── library/             # 已发布文章（按分类）
@@ -23,7 +24,6 @@ ai-classroom/
 │   ├── articles/            # 同步生成的文章（勿手改）
 │   ├── explore.md           # 探索页（sync 生成）
 │   └── guide/               # 站点内指南页
-├── import/                  # 待导入的原始资料（按作者分子目录）
 ├── scripts/                 # 自动化脚本
 │   └── sync-content.mjs     # 内容同步
 ├── wrangler.jsonc           # Cloudflare Workers 部署配置
@@ -60,12 +60,28 @@ npm run docs:preview
 
 ## 投稿流程
 
-1. 在 `content/library/<分类>/` 新建 `.md` 文件
-2. 填写 frontmatter（title、description、author、date）
-3. 提交 Pull Request
-4. 审核合并后站点自动更新
+推荐通过 GitHub Pull Request 投稿：**不用**直接改 `content/library/`，只需在 `import/` 中放置稿件，维护者会完成格式整理与正式发布。
 
-详细规范见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+1. Fork 本仓库（或在本仓库创建 feature 分支）
+2. 在 `import/<你的目录名>/` 下放置稿件与配图
+3. 确保同级有 `readme.md`，并填写作者名称（如 `作者名称：张三`）
+4. 提交 Pull Request
+5. 维护者审核通过后，将内容整理至 `content/library/` 并部署上线
+
+`import/` 目录约定：
+
+```
+import/
+└── <你的目录名>/          # 建议用拼音或英文名，如 zhangsan
+    ├── readme.md          # 必填，声明作者名称
+    └── <文章标题>/        # 每篇稿件一个子目录
+        ├── 文章标题.md
+        └── images/        # 配图（可选）
+```
+
+稿件正文暂不需要 frontmatter。不熟悉 Git 时，也可将 Word、飞书文档等直接发给 AI 研究小组。
+
+详细规范见站点内 [投稿说明](https://ai-classroom.qubitlab.cc/guide/contributing) 与仓库 [CONTRIBUTING.md](./CONTRIBUTING.md)。
 
 ## 内容分类
 
