@@ -53,6 +53,18 @@
 
 调研对象示例：Lusion、Locomotive、Obys Agency、Evervault、Linear、Unseen Studio、Igloo Inc、Vast Space、Exo Ape、darkroom.engineering、Active Theory。
 
+### 优秀前端参考站（调研素材库）
+
+不必从零搜「高级官网」——优先从下面几类策展站点挑标杆，再交给 Agent 做逆向分析：
+
+| 站点 | 适合挖什么 | 用法建议 |
+|------|------------|----------|
+| [Motion Sites](https://motionsites.ai) | 以动效与滚动叙事见长的创意站合集 | 定「气质 / 动效预算」时先刷一轮，挑 3～5 个进调研清单 |
+| [GSAP Showcase](https://gsap.com/showcase/) | 真实落地的 GSAP 案例（ScrollTrigger、SplitText 等） | 技术栈已定 GSAP 时，从这里抄「可实现」的动效模式，而非只抄视觉截图 |
+| [Awwwards](https://www.awwwards.com) | SOTD / 获奖级整站审美与信息架构 | 指定调研范围时写明「Awwwards/SOTD 级」，避免 Agent 只找通用模板站 |
+
+**经验**：Motion Sites / Awwwards 负责「看见什么值得学」；GSAP Showcase 负责「确认怎么做成本可控」。三者组合，比只丢一句「参考获奖站」更稳。
+
 ### 可复制的 Prompt 结构
 
 ```

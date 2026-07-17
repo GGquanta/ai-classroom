@@ -29,7 +29,7 @@
 | 阶段 | AI 做什么 | 人做什么 | 典型产物 |
 |------|-----------|----------|----------|
 | 需求输入 | 理解受众、信息架构、品牌约束 | 提供 logo 色板、业务文案、产品图 | 需求文档（信息架构、禁用项） |
-| 设计调研 | 爬取/分析标杆站 HTML/CSS/JS，归类技巧 | 指定调研范围（Awwwards/SOTD 级） | 结构化设计调研文档（约 10 站） |
+| 设计调研 | 爬取/分析标杆站 HTML/CSS/JS，归类技巧 | 从灵感站目录圈定调研范围（约 10 站） | 结构化设计调研文档（约 10 站） |
 | 方向探索 | 生成多套完整静态 mockup + 动效说明 | 在终端描述偏好或点击 Select | 多方向对比 Mockup 页面 |
 | 工程实现 | 按选定方向写组件、动效注册表、部署配置 | 验收视觉、校对文案 | 整站源码 |
 | 内容维护 | 协助翻译、结构化 | 审定企业事实与合规表述 | 多语言内容数据文件 |
@@ -51,6 +51,18 @@
 - `standout`：该站最值得学的一件事
 
 调研对象示例：Lusion、Locomotive、Obys Agency、Evervault、Linear、Unseen Studio、Igloo Inc、Vast Space、Exo Ape、darkroom.engineering、Active Theory。
+
+### 优秀前端参考站（调研素材库）
+
+不必从零搜「高级官网」——优先从下面几类策展站点挑标杆，再交给 Agent 做逆向分析：
+
+| 站点 | 适合挖什么 | 用法建议 |
+|------|------------|----------|
+| [Motion Sites](https://motionsites.ai) | 以动效与滚动叙事见长的创意站合集 | 定「气质 / 动效预算」时先刷一轮，挑 3～5 个进调研清单 |
+| [GSAP Showcase](https://gsap.com/showcase/) | 真实落地的 GSAP 案例（ScrollTrigger、SplitText 等） | 技术栈已定 GSAP 时，从这里抄「可实现」的动效模式，而非只抄视觉截图 |
+| [Awwwards](https://www.awwwards.com) | SOTD / 获奖级整站审美与信息架构 | 指定调研范围时写明「Awwwards/SOTD 级」，避免 Agent 只找通用模板站 |
+
+**经验**：Motion Sites / Awwwards 负责「看见什么值得学」；GSAP Showcase 负责「确认怎么做成本可控」。三者组合，比只丢一句「参考获奖站」更稳。
 
 ### 可复制的 Prompt 结构
 
