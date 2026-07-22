@@ -42,10 +42,10 @@ onMounted(() => {
       />
       <div class="hero-overlay" aria-hidden="true" />
       <div class="hero-inner fade-in">
-        <p class="hero-eyebrow">团队知识库 · 持续更新</p>
-        <h1 class="hero-title">AI 协同办公与开发<br />实战经验课堂</h1>
+        <p class="hero-eyebrow">国光量子 · 团队知识库</p>
+        <h1 class="hero-title">AI 课堂</h1>
         <p class="hero-subtitle">
-          汇集 AI 工具、协同流程、Prompt 模板与项目案例，系统学习、随时查阅。
+          汇集工具、协同流程、Prompt 模板与项目案例，把 AI 用进日常办公与开发。
         </p>
         <div class="hero-actions">
           <a href="/explore" class="btn btn-primary">浏览全部内容</a>
