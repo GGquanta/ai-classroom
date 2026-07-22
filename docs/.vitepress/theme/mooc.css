@@ -1859,8 +1859,8 @@
   }
 
   .spotlight-card {
-    aspect-ratio: 4 / 3;
-    min-height: 280px;
+    aspect-ratio: 3 / 4;
+    min-height: 440px;
     max-height: none;
     border-radius: var(--mooc-radius-lg);
   }
@@ -1871,7 +1871,7 @@
     right: 0;
     bottom: 0;
     width: 100%;
-    padding: 24px 24px 22px;
+    padding: 20px 22px 18px;
     justify-content: flex-end;
     border-right: none;
     border-top: 1px solid rgba(255, 255, 255, 0.55);
