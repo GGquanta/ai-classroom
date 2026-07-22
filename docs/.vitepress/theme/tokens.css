@@ -27,9 +27,19 @@
   --mooc-text-2xl: 1.5rem;
   --mooc-text-3xl: 2rem;
   --mooc-text-4xl: clamp(2.25rem, 5vw, 3.5rem);
+  --mooc-text-hero: clamp(2.6rem, 6.2vw, 4.05rem);
   --mooc-leading-tight: 1.25;
+  --mooc-leading-display: 1.08;
   --mooc-leading-normal: 1.5;
   --mooc-leading-relaxed: 1.75;
+
+  /* Hero display type */
+  --mooc-hero-ink: #050b14;
+  --mooc-hero-ink-mid: #0a3a6e;
+  --mooc-hero-ink-soft: #0b5cab;
+  --mooc-hero-title-shadow:
+    0 2px 4px rgba(5, 11, 20, 0.12),
+    0 12px 28px rgba(11, 92, 171, 0.14);
 
   /* Spacing */
   --mooc-space-1: 4px;

@@ -251,29 +251,70 @@
 }
 
 .hero-eyebrow {
-  font-size: var(--mooc-text-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--mooc-primary);
-  margin-bottom: var(--mooc-space-4);
-  letter-spacing: 0.04em;
+  color: var(--mooc-primary-dark);
+  margin: 0 0 var(--mooc-space-5);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 1.25rem;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--mooc-primary), rgba(11, 92, 171, 0.25));
 }
 
 .hero-title {
-  font-size: var(--mooc-text-4xl);
+  font-size: var(--mooc-text-hero);
   font-weight: 800;
-  line-height: var(--mooc-leading-tight);
+  line-height: var(--mooc-leading-display);
   margin: 0 0 var(--mooc-space-5);
-  letter-spacing: -0.03em;
-  max-width: 720px;
+  letter-spacing: -0.048em;
+  max-width: 12.5em;
+  color: var(--mooc-hero-ink);
+  text-wrap: balance;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(
+    175deg,
+    var(--mooc-hero-ink) 0%,
+    #0a1f38 42%,
+    var(--mooc-hero-ink-mid) 78%,
+    var(--mooc-hero-ink-soft) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(5, 11, 20, 0.14))
+    drop-shadow(0 12px 28px rgba(11, 92, 171, 0.16));
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-title {
+    color: var(--mooc-hero-ink);
+    -webkit-text-fill-color: currentColor;
+    background-image: none;
+    text-shadow: var(--mooc-hero-title-shadow);
+    filter: none;
+  }
 }
 
 .hero-subtitle {
-  font-size: var(--mooc-text-lg);
-  color: var(--mooc-muted);
-  max-width: 520px;
-  line-height: var(--mooc-leading-relaxed);
+  font-size: clamp(1.0625rem, 1.6vw, 1.2rem);
+  color: #3f4f63;
+  max-width: 34rem;
+  line-height: 1.7;
+  letter-spacing: 0.012em;
   margin: 0 0 var(--mooc-space-8);
+  font-weight: 500;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.82);
 }
 
 .hero-actions {
@@ -1835,6 +1876,16 @@
 
   .hero-editorial {
     padding: var(--mooc-space-10) var(--mooc-space-5) var(--mooc-space-8);
+  }
+
+  .hero-title {
+    letter-spacing: -0.035em;
+    max-width: none;
+  }
+
+  .hero-subtitle {
+    font-size: var(--mooc-text-base);
+    line-height: 1.65;
   }
 
   .section {
