@@ -8,16 +8,20 @@ import MoocHeader from './MoocHeader.vue'
 import MoocFooter from './MoocFooter.vue'
 import ArticleGrid from './ArticleGrid.vue'
 import CategoryIcon from './CategoryIcon.vue'
+import LatestSpotlight from './LatestSpotlight.vue'
 import { useArticles } from '../composables/useArticles'
 import type { Article } from '../composables/useArticles'
 
+const LATEST_COUNT = 3
 const FEATURED_COUNT = 8
 
 const { categories, recent, random } = useArticles()
-const featuredArticles = ref<Article[]>(recent(FEATURED_COUNT))
+const latestArticles = recent(LATEST_COUNT)
+const excludeIds = latestArticles.map((a) => a.id)
+const featuredArticles = ref<Article[]>(recent(FEATURED_COUNT, excludeIds))
 
 onMounted(() => {
-  featuredArticles.value = random(FEATURED_COUNT)
+  featuredArticles.value = random(FEATURED_COUNT, excludeIds)
 })
 </script>
 
@@ -54,6 +58,22 @@ onMounted(() => {
         on
         <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a>
       </p>
+    </section>
+
+    <section v-if="latestArticles.length" class="section section-latest">
+      <div class="section-inner fade-in">
+        <div class="section-head">
+          <div>
+            <h2>最近更新</h2>
+            <p>按发布日期展示最新实践</p>
+          </div>
+          <a href="/explore" class="section-more">
+            查看全部
+            <IconChevronRight :size="16" :stroke="2" aria-hidden="true" />
+          </a>
+        </div>
+        <LatestSpotlight :articles="latestArticles" />
+      </div>
     </section>
 
     <section class="section section-featured">

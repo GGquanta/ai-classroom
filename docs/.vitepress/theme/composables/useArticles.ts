@@ -57,14 +57,20 @@ export function useArticles() {
     })
   }
 
-  function recent(limit = 6) {
-    return [...data.articles]
+  function poolExcluding(excludeIds?: Iterable<string>) {
+    if (!excludeIds) return [...data.articles]
+    const excluded = new Set(excludeIds)
+    return data.articles.filter((a) => !excluded.has(a.id))
+  }
+
+  function recent(limit = 6, excludeIds?: Iterable<string>) {
+    return poolExcluding(excludeIds)
       .sort((a, b) => b.date.localeCompare(a.date))
       .slice(0, limit)
   }
 
-  function random(limit = 6) {
-    const pool = [...data.articles]
+  function random(limit = 6, excludeIds?: Iterable<string>) {
+    const pool = poolExcluding(excludeIds)
     for (let i = pool.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
       ;[pool[i], pool[j]] = [pool[j], pool[i]]
