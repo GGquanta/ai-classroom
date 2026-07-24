@@ -22,7 +22,10 @@ const canShare = computed(
 )
 
 const hasEditLink = computed(
-  () => theme.value.editLink && frontmatter.value.editLink !== false,
+  () =>
+    theme.value.editLink &&
+    frontmatter.value.editLink !== false &&
+    !(article.value && isProtectedArticle(article.value)),
 )
 const feedbackLink = computed(() => theme.value.feedbackLink)
 const hasFeedbackLink = computed(() => !!feedbackLink.value?.url)
