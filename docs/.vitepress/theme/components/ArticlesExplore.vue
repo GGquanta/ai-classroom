@@ -11,6 +11,7 @@ const { articles, categories, authors } = useArticles()
 const category = ref('all')
 const author = ref('all')
 const sort = ref<'newest' | 'oldest'>('newest')
+const featured = ref(false)
 
 function readQuery() {
   if (typeof window === 'undefined') return
@@ -18,16 +19,18 @@ function readQuery() {
   category.value = search.get('category') ?? 'all'
   author.value = search.get('author') ?? 'all'
   sort.value = (search.get('sort') as 'newest' | 'oldest') ?? 'newest'
+  featured.value = search.get('featured') === '1'
 }
 
 onMounted(readQuery)
 
-watch([category, author, sort], () => {
+watch([category, author, sort, featured], () => {
   if (typeof window === 'undefined') return
   const params = new URLSearchParams()
   if (category.value !== 'all') params.set('category', category.value)
   if (author.value !== 'all') params.set('author', author.value)
   if (sort.value !== 'newest') params.set('sort', sort.value)
+  if (featured.value) params.set('featured', '1')
   const qs = params.toString()
   const url = qs ? `/explore?${qs}` : '/explore'
   window.history.replaceState(null, '', url)
@@ -37,6 +40,7 @@ const filtered = computed(() => {
   let list = [...articles.value]
   if (category.value !== 'all') list = list.filter((a) => a.category === category.value)
   if (author.value !== 'all') list = list.filter((a) => a.author === author.value)
+  if (featured.value) list = list.filter((a) => a.featured === true)
   list.sort((a, b) =>
     sort.value === 'newest'
       ? b.date.localeCompare(a.date)
@@ -63,6 +67,7 @@ const filtered = computed(() => {
           v-model:model-category="category"
           v-model:model-author="author"
           v-model:model-sort="sort"
+          v-model:model-featured="featured"
           :categories="categories"
           :authors="authors"
         />

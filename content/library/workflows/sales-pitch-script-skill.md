@@ -10,6 +10,7 @@ tags:
   - 办公效率
 category: workflows
 cover: /assets/sales-pitch-script-skill/cover-hero.png
+featured: true
 ---
 
 # 用 AI Skill 把产品材料变成销售宣讲话术

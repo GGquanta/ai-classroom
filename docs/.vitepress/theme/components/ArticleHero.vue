@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useData } from 'vitepress'
-import { IconUser, IconCalendar, IconChevronRight, IconCopy, IconDownload, IconStar, IconStarFilled } from '@tabler/icons-vue'
+import { IconUser, IconCalendar, IconChevronRight, IconCopy, IconDownload, IconStar, IconStarFilled, IconSparkles } from '@tabler/icons-vue'
 import { useArticles, formatDate, normalizeColor, getArticleCover, getAuthorAvatar } from '../composables/useArticles'
 import { useArticleAccess } from '../composables/useArticleAccess'
 import { useFavorites } from '../composables/useFavorites'
@@ -106,6 +106,15 @@ async function handleDownloadSkill() {
               }"
             >
               {{ article.categoryLabel }}
+            </a>
+
+            <a
+              v-if="article.featured"
+              href="/explore?featured=1"
+              class="hero-featured-pill"
+            >
+              <IconSparkles :size="14" :stroke="2" aria-hidden="true" />
+              编辑推荐
             </a>
 
             <button

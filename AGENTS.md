@@ -57,6 +57,7 @@ tags:
 category: tools | workflows | prompts | cases
 cover: /assets/<slug>/cover.png   # 可选，卡片封面图
 protected: true                    # 可选，需密码访问（构建需 ARTICLE_ACCESS_PASSWORD）
+featured: true                     # 可选，编辑推荐（卡片/正文展示标签，探索页可筛选）
 ---
 ```
 

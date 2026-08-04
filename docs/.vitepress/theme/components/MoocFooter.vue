@@ -31,7 +31,12 @@ const year = new Date().getFullYear()
       <p class="footer-credits">
         <span>设计与开发</span>
         <span class="footer-credits-dot" aria-hidden="true">·</span>
-        <span class="footer-credits-team">
+        <a
+          href="https://ai-squad.qubitlab.cc/"
+          class="footer-credits-team"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             src="/ai-research-logo.png"
             alt=""
@@ -40,7 +45,7 @@ const year = new Date().getFullYear()
             class="footer-credits-logo"
           />
           <span>AI研究小组</span>
-        </span>
+        </a>
       </p>
     </div>
   </footer>

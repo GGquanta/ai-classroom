@@ -173,6 +173,7 @@ async function main() {
       const tags = Array.isArray(meta.tags) ? meta.tags : meta.tags ? [String(meta.tags)] : []
       const cover = meta.cover ? String(meta.cover) : null
       const isProtected = isProtectedFlag(meta.protected)
+      const isFeatured = isProtectedFlag(meta.featured)
       const articleId = `${category.id}/${slug}`
 
       if (isProtected) {
@@ -188,7 +189,16 @@ async function main() {
         protectedContent[articleId] = encryptArticlePayload(html, rewrittenBody, accessPassword)
 
         const output = serializeFrontmatter(
-          { ...meta, title, description, author, date, tags, protected: true },
+          {
+            ...meta,
+            title,
+            description,
+            author,
+            date,
+            tags,
+            protected: true,
+            ...(isFeatured ? { featured: true } : {}),
+          },
           slug,
           category.id,
         ) + PROTECTED_PLACEHOLDER
@@ -196,7 +206,15 @@ async function main() {
         await writeFile(join(destDir, `${slug}.md`), output, 'utf-8')
       } else {
         const output = serializeFrontmatter(
-          { ...meta, title, description, author, date, tags },
+          {
+            ...meta,
+            title,
+            description,
+            author,
+            date,
+            tags,
+            ...(isFeatured ? { featured: true } : {}),
+          },
           slug,
           category.id,
         ) + rewrittenBody
@@ -225,6 +243,7 @@ async function main() {
         link,
         cover,
         ...(isProtected ? { protected: true } : {}),
+        ...(isFeatured ? { featured: true } : {}),
       })
     }
 

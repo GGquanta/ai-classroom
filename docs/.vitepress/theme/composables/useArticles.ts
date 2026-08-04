@@ -25,6 +25,7 @@ export interface Article {
   link: string
   cover: string | null
   protected?: boolean
+  featured?: boolean
 }
 
 export interface Category {

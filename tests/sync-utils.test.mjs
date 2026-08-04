@@ -93,6 +93,15 @@ protected: true
       assert.match(output, /aside: true/)
       assert.match(output, /tags:\n  - a/)
     })
+
+    it('保留 featured 标记', () => {
+      const output = serializeFrontmatter(
+        { title: '标题', author: '作者', date: '2026-01-01', featured: true },
+        'slug',
+        'workflows',
+      )
+      assert.match(output, /featured: true/)
+    })
   })
 
   describe('rewriteImagePaths', () => {

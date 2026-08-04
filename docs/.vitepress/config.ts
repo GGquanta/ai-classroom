@@ -8,6 +8,7 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
   hostname: 'https://ai-classroom.qubitlab.cc',
+  scrollOffset: { selector: '.mooc-header', padding: 16 },
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico', sizes: 'any' }],

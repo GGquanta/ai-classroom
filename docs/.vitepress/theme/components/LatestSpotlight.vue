@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconLock } from '@tabler/icons-vue'
+import { IconLock, IconSparkles } from '@tabler/icons-vue'
 import type { Article } from '../composables/useArticles'
 import { formatDate, getArticleCover } from '../composables/useArticles'
 
@@ -25,7 +25,13 @@ defineProps<{
         :loading="index === 0 ? 'eager' : 'lazy'"
         :fetchpriority="index === 0 ? 'high' : undefined"
       />
-      <span v-if="index === 0" class="spotlight-badge">最新</span>
+      <div v-if="index === 0 || article.featured" class="spotlight-badges">
+        <span v-if="index === 0" class="spotlight-badge">最新</span>
+        <span v-if="article.featured" class="spotlight-badge spotlight-badge-featured">
+          <IconSparkles :size="12" :stroke="2" aria-hidden="true" />
+          编辑推荐
+        </span>
+      </div>
       <div class="spotlight-content">
         <div class="spotlight-meta-row">
           <span class="spotlight-category">{{ article.categoryLabel }}</span>

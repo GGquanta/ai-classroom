@@ -446,11 +446,20 @@
   transform: scale(1.06);
 }
 
-.spotlight-badge {
+.spotlight-badges {
   position: absolute;
   top: 28px;
   left: 36px;
   z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mooc-space-2);
+}
+
+.spotlight-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 7px 14px;
   border-radius: var(--mooc-radius-full);
   background: rgba(255, 255, 255, 0.55);
@@ -465,6 +474,11 @@
   box-shadow:
     0 4px 16px rgba(15, 23, 42, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.spotlight-badge-featured {
+  color: #9a3412;
 }
 
 .spotlight-content {
@@ -970,11 +984,26 @@
   letter-spacing: 0.02em;
 }
 
+.card-status-icons {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mooc-space-2);
+}
+
+.card-featured-icon,
 .card-lock-icon {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.card-featured-icon {
+  color: #b45309;
+}
+
+.card-lock-icon {
   color: #d4a017;
 }
 
@@ -1069,27 +1098,100 @@
   color: #fff;
 }
 
+.pill-featured {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #9a3412;
+  border-color: rgba(180, 83, 9, 0.28);
+  background: rgba(180, 83, 9, 0.06);
+  white-space: nowrap;
+}
+
+.pill-featured:hover {
+  border-color: #b45309;
+  color: #9a3412;
+  background: rgba(180, 83, 9, 0.1);
+}
+
+.pill-featured.active {
+  background: #b45309;
+  border-color: #b45309;
+  color: #fff;
+}
+
 .filters-side {
   display: flex;
+  align-items: center;
   gap: var(--mooc-space-3);
   flex-shrink: 0;
 }
 
-.filter-select {
-  padding: var(--mooc-space-2) var(--mooc-space-3);
-  border-radius: var(--mooc-radius-sm);
+.filter-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 148px;
+  border-radius: var(--mooc-radius-full);
   border: 1px solid var(--mooc-border);
   background: var(--mooc-surface);
+  color: var(--mooc-muted);
+  transition:
+    border-color var(--mooc-duration) var(--mooc-ease),
+    color var(--mooc-duration) var(--mooc-ease),
+    box-shadow var(--mooc-duration) var(--mooc-ease);
+}
+
+.filter-select-wrap:hover {
+  border-color: var(--mooc-primary);
+  color: var(--mooc-primary);
+}
+
+.filter-select-wrap:focus-within {
+  border-color: var(--mooc-primary);
+  color: var(--mooc-primary);
+  box-shadow: 0 0 0 3px var(--mooc-primary-soft);
+}
+
+.filter-select-icon {
+  position: absolute;
+  left: 12px;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.filter-select-chevron {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.filter-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 7px 32px 7px 34px;
+  border: none;
+  border-radius: inherit;
+  background: transparent;
   font-size: var(--mooc-text-sm);
-  min-width: 130px;
-  color: var(--mooc-text);
+  font-weight: 500;
   font-family: inherit;
+  color: var(--mooc-text);
+  line-height: 1.4;
   cursor: pointer;
 }
 
+.filter-select:focus {
+  outline: none;
+}
+
 .filter-select:focus-visible {
-  outline: 2px solid var(--mooc-primary);
-  outline-offset: 2px;
+  outline: none;
 }
 
 .result-bar {
@@ -1276,6 +1378,28 @@
 }
 
 .hero-category-pill:hover {
+  opacity: 0.85;
+}
+
+.hero-featured-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--mooc-radius-full);
+  border: 1px solid rgba(180, 83, 9, 0.28);
+  background: rgba(180, 83, 9, 0.08);
+  color: #9a3412;
+  font-size: var(--mooc-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  line-height: 1;
+  transition: opacity var(--mooc-duration) var(--mooc-ease);
+}
+
+.hero-featured-pill:hover {
   opacity: 0.85;
 }
 
@@ -1780,6 +1904,12 @@
   align-items: center;
   gap: 6px;
   color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  transition: color var(--mooc-duration) var(--mooc-ease);
+}
+
+.footer-credits-team:hover {
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .footer-credits-logo {
@@ -1822,7 +1952,7 @@
     padding: 32px 28px 28px 32px;
   }
 
-  .spotlight-badge {
+  .spotlight-badges {
     top: 24px;
     left: 28px;
   }
@@ -1949,7 +2079,7 @@
     -webkit-line-clamp: 2;
   }
 
-  .spotlight-badge {
+  .spotlight-badges {
     top: 16px;
     left: 16px;
   }
@@ -1976,10 +2106,12 @@
 
   .filters-side {
     width: 100%;
+    flex-wrap: wrap;
   }
 
-  .filter-select {
+  .filter-select-wrap {
     flex: 1;
+    min-width: 140px;
   }
 
   .footer-grid {

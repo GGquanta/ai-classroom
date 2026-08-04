@@ -10,6 +10,7 @@ tags:
   - 办公效率
 category: workflows
 cover: /assets/ai-meeting-minutes-workflow/ai-meeting-minutes-workflow.png
+featured: true
 ---
 
 # 如何使用 AI 工具快速整理会议纪要
