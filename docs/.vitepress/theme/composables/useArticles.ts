@@ -24,6 +24,7 @@ export interface Article {
   categoryColor: string
   link: string
   cover: string | null
+  coverTone?: 'dark' | 'light'
   protected?: boolean
   featured?: boolean
 }

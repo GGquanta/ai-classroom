@@ -12,6 +12,7 @@ tags:
   - cursor
 category: tools
 cover: /assets/open-kimi-ppt-technical-sharing/cover.png
+coverTone: dark
 featured: true
 ---
 
