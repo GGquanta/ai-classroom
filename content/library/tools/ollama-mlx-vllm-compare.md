@@ -1,6 +1,7 @@
 ---
 title: Mac 本地大模型部署方案对比：Ollama、MLX、llama.cpp、LM Studio、vLLM
 description: 在 Apple Silicon Mac 上部署大模型的五种方案实测对比，涵盖安装、性能、适用场景及中国用户加速技巧，帮助选型。
+author: Rook1elov1
 date: 2026-08-05
 tags:
   - ollama
@@ -9,6 +10,7 @@ tags:
   - 本地部署
   - vllm
 category: tools
+cover: /assets/ollama-mlx-vllm-compare/cover.png
 ---
 
 # Mac 本地大模型部署方案对比：Ollama、MLX、llama.cpp、LM Studio、vLLM
@@ -18,6 +20,8 @@ category: tools
 随着大语言模型在个人开发中的广泛应用，"本地运行推理" 成为刚需——既能保护数据隐私，又能减少 API 费用，还能离线使用。Apple Silicon Mac 凭借统一内存架构和高内存带宽，在本地推理场景中表现出色。
 
 但 Mac 上的推理引擎选择繁多，各自定位不同。本文基于在 Mac M5 上实际部署 **Ollama + Qwen3 14B**（9.3 GB）的经验，结合对 MLX、llama.cpp、LM Studio、vLLM 的调研，对比五种常见方案，帮助读者选型。
+
+![Mac 本地 AI 工作台（手绘插画）](images/mac-local-ai-workbench.png)
 
 ---
 
@@ -30,6 +34,8 @@ category: tools
 | **llama.cpp** | 自研 | ⭐⭐ 中等 | GGUF | ✅ Apple Silicon | 精细控制、嵌入式部署 |
 | **MLX** | Apple 原生 | ⭐⭐⭐ 需要编码 | MLX 格式 | ✅ Apple Silicon 专属 | 追求极限性能 |
 | **vLLM** | CUDA | ⭐⭐⭐ 复杂 | AWQ/GPTQ | ❌ 不支持 Mac | Linux 服务器生产部署 |
+
+![五种本地推理路线概览（手绘插画）](images/local-inference-landscape.png)
 
 ---
 
@@ -157,6 +163,8 @@ vLLM 是目前最流行的高并发推理服务框架，其 PagedAttention 技�
 ---
 
 ## 三、中国用户加速技巧
+
+![模型下载与镜像加速示意（手绘插画）](images/local-model-download-mirror.png)
 
 如果你在国内，直接访问 Hugging Face 下载模型经常失败。解决方案是配置国内镜像：
 
