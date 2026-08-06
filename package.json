@@ -7,7 +7,7 @@
   "scripts": {
     "sync": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/sync-content.mjs",
     "test": "node --test tests/**/*.test.mjs",
-    "docs:dev": "npm run sync && vitepress dev docs",
+    "docs:dev": "npm run sync && vitepress dev docs --port 7295",
     "docs:build": "npm run sync && vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "deploy": "npm run docs:build && wrangler deploy"

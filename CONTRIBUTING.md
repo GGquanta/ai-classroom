@@ -71,7 +71,7 @@ npm install
 npm run docs:dev
 ```
 
-访问 [http://localhost:5173/](http://localhost:5173/) 查看效果。
+访问 [http://localhost:7295/](http://localhost:7295/) 查看效果。
 
 ## 审核流程
 

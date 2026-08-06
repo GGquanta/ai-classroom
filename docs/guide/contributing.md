@@ -106,4 +106,4 @@ npm install
 npm run docs:dev
 ```
 
-浏览器访问 `http://localhost:5173/` 查看效果。非开发者无需执行此步骤。
+浏览器访问 `http://localhost:7295/` 查看效果。非开发者无需执行此步骤。
