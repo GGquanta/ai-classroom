@@ -9,7 +9,7 @@ tags:
   - 简历筛查
   - 面试
 category: workflows
-cover: /assets/ai-resume-screening-interview/hero-ai-recruitment.png
+cover: /assets/ai-resume-screening-interview/interview-scene.png
 featured: true
 ---
 
