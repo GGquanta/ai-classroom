@@ -1,22 +1,9 @@
----
-title: 定制自己的 Agent Skill
-description: 从何时该编写 Skill、目录与 SKILL.md 结构、description 触发写法，到做一个可验证的小例子，学会把团队经验沉淀成可复用技能。
-author: wh
-date: 2026-08-06
-tags:
-  - agent-skills
-  - cursor
-  - workflow
-category: tools
-cover: /assets/make-your-own-skill/cover.png
-coverTone: dark
----
 
-![定制自己的 Agent Skill 封面](images/cover.png)
+![定制自己的 Agent Skill 封面](/assets/make-your-own-skill/cover.png)
 
 ## 1. Skill 是什么，和 AGENTS.md 差在哪
 
-![AGENTS.md 始终生效 vs Skill 按需加载](images/skill-vs-agents.png)
+![AGENTS.md 始终生效 vs Skill 按需加载](/assets/make-your-own-skill/skill-vs-agents.png)
 
 - **AGENTS.md**（或等价项目约定）：Agent **几乎每次任务都会看到**的全局背景——目录职责、禁令、常用命令。适合「这个仓库永远要遵守的事」。
 - **Skill**：专项流程或领域知识，Agent **认为相关时才读完整说明**。适合「某类任务才需要的长步骤、模板、检查清单」。
@@ -43,7 +30,7 @@ coverTone: dark
 
 ## 3. 目录与最小结构
 
-![Skill 目录结构示意](images/skill-directory.png)
+![Skill 目录结构示意](/assets/make-your-own-skill/skill-directory.png)
 
 最小可用形态：
 
@@ -94,7 +81,7 @@ Agent 是否「想起」这个 Skill，很大程度上看 description。要同�
 - 需要固定格式时，直接给模板
 - 细节特别多再拆到 `reference.md`，避免把 SKILL.md 写成小说
 
-![自制 Skill 四步流程](images/skill-authoring-flow.png)
+![自制 Skill 四步流程](/assets/make-your-own-skill/skill-authoring-flow.png)
 
 推荐节奏：**选题 → 写 description → 写步骤 → 开新对话验证是否触发**。
 
