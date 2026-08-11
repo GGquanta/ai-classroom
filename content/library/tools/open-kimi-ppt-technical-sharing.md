@@ -19,7 +19,7 @@ featured: true
 # open-kimi-ppt 技术分享：可编辑演示文稿的 Agent 工作流
 
 资料快照：2026 年 8 月 6 日。  
-分析对象：[Binaryify/open-kimi-ppt-skill](https://github.com/Binaryify/open-kimi-ppt-skill)。
+分析对象：[GGquanta/open-kimi-ppt](https://github.com/GGquanta/open-kimi-ppt)。
 
 ![open-kimi-ppt 技术分享封面：结构化 PPTD、可视化编辑与 PPTX 导出](images/cover.png)
 
@@ -70,7 +70,7 @@ featured: true
 
 ![项目本地编辑器概览：打开 PPTD 项目、预览页面并进行编辑](images/editor-overview.png)
 
-图 1：项目 README 中的本地编辑器示例。原图见 [docs/images/editor-overview.png](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/editor-overview.png)。
+图 1：项目 README 中的本地编辑器示例。原图见 [docs/images/editor-overview.png](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/editor-overview.png)。
 
 ### 2.3 必须保留的判断
 
@@ -286,7 +286,7 @@ PPTD 的几个关键约束是：
 
 ![导出面板示例：支持 PPTX、图片、字体嵌入和切换动画选项](images/export-pptx.png)
 
-图 2：项目示例中的导出面板。原图见 [docs/images/export-pptx.png](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/export-pptx.png)。
+图 2：项目示例中的导出面板。原图见 [docs/images/export-pptx.png](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/export-pptx.png)。
 
 ## 五、面向哪些用户
 
@@ -469,7 +469,7 @@ deck/
 
 ![示例项目在本地编辑器中打开：左侧显示 18 页缩略图，中央显示可编辑画布](images/dji-editor.png)
 
-图 3：项目内置的 DJI Osmo Pocket 4 示例项目。原图见 [docs/images/example-dji-pocket4-editor.png](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/example-dji-pocket4-editor.png)。
+图 3：项目内置的 DJI Osmo Pocket 4 示例项目。原图见 [docs/images/example-dji-pocket4-editor.png](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/example-dji-pocket4-editor.png)。
 
 ### 7.4 先导出页面图片，再导出 PPTX
 
@@ -528,7 +528,7 @@ python3 ~/.agents/skills/open-kimi-ppt/scripts/export_pptx.py \
 
 ![导出的产品 PPTX 示例：在 PowerPoint 中保留页面和可编辑对象](images/dji-pptx.png)
 
-图 4：DJI Osmo Pocket 4 示例导出的 PPTX。原图见 [docs/images/example-dji-pocket4-pptx.png](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/example-dji-pocket4-pptx.png)。
+图 4：DJI Osmo Pocket 4 示例导出的 PPTX。原图见 [docs/images/example-dji-pocket4-pptx.png](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/example-dji-pocket4-pptx.png)。
 
 ### 8.3 教学、培训与科普
 
@@ -559,11 +559,11 @@ python3 ~/.agents/skills/open-kimi-ppt/scripts/export_pptx.py \
 
 ![风格案例：项目不固定单一主题，可生成 Liquid Glass 等视觉方向](images/liquid-glass.png)
 
-图 5：项目 README 中的 Liquid Glass 风格案例。原图见 [docs/images/example-deepseek-liquid-glass.png](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/example-deepseek-liquid-glass.png)。
+图 5：项目 README 中的 Liquid Glass 风格案例。原图见 [docs/images/example-deepseek-liquid-glass.png](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/example-deepseek-liquid-glass.png)。
 
 ![跨主题案例：小米 YU7 产品介绍 PPTX](images/yu7-pptx.png)
 
-图 6：项目 README 中的小米 YU7 产品案例。原图见 [docs/images/example-yu7-pptx.png](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/example-yu7-pptx.png)。
+图 6：项目 README 中的小米 YU7 产品案例。原图见 [docs/images/example-yu7-pptx.png](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/example-yu7-pptx.png)。
 
 ## 九、最佳实践
 
@@ -813,14 +813,14 @@ PPTD 覆盖文本、形状、图片、表格和图表等常用元素，但它不
 
 ## 十四、参考资料与图片来源
 
-- [项目仓库：Binaryify/open-kimi-ppt-skill](https://github.com/Binaryify/open-kimi-ppt-skill)
-- [项目 README](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/README.md)
-- [Skill 定义：skills/open-kimi-ppt/SKILL.md](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/skills/open-kimi-ppt/SKILL.md)
-- [PPTD 格式规范：skills/open-kimi-ppt/reference/pptd.md](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/skills/open-kimi-ppt/reference/pptd.md)
+- [项目仓库：GGquanta/open-kimi-ppt](https://github.com/GGquanta/open-kimi-ppt)
+- [项目 README](https://github.com/GGquanta/open-kimi-ppt/blob/main/README.md)
+- [Skill 定义：skills/open-kimi-ppt/SKILL.md](https://github.com/GGquanta/open-kimi-ppt/blob/main/skills/open-kimi-ppt/SKILL.md)
+- [PPTD 格式规范：skills/open-kimi-ppt/reference/pptd.md](https://github.com/GGquanta/open-kimi-ppt/blob/main/skills/open-kimi-ppt/reference/pptd.md)
 - [npm 包：open-kimi-ppt-skills](https://www.npmjs.com/package/open-kimi-ppt-skills)
-- [编辑器概览图](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/editor-overview.png)
-- [导出面板图](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/export-pptx.png)
-- [DJI 编辑器案例图](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/example-dji-pocket4-editor.png)
-- [DJI PPTX 案例图](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/example-dji-pocket4-pptx.png)
-- [Liquid Glass 案例图](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/example-deepseek-liquid-glass.png)
-- [小米 YU7 PPTX 案例图](https://github.com/Binaryify/open-kimi-ppt-skill/blob/main/docs/images/example-yu7-pptx.png)
+- [编辑器概览图](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/editor-overview.png)
+- [导出面板图](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/export-pptx.png)
+- [DJI 编辑器案例图](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/example-dji-pocket4-editor.png)
+- [DJI PPTX 案例图](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/example-dji-pocket4-pptx.png)
+- [Liquid Glass 案例图](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/example-deepseek-liquid-glass.png)
+- [小米 YU7 PPTX 案例图](https://github.com/GGquanta/open-kimi-ppt/blob/main/docs/images/example-yu7-pptx.png)
