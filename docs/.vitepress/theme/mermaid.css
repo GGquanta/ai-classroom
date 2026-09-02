@@ -1,0 +1,71 @@
+/* Mermaid：ELK orthogonal 自绘 SVG，颜色跟站点 token 走 */
+
+.mermaid-diagram {
+  --bg: var(--mooc-surface);
+  --fg: var(--mooc-text);
+  --accent: var(--mooc-primary);
+  --muted: var(--mooc-muted);
+  --surface: var(--mooc-bg);
+  --border: var(--mooc-border);
+  --_text: var(--fg);
+  --_text-sec: var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+  --_text-muted: var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+  --_text-faint: color-mix(in srgb, var(--fg) 25%, var(--bg));
+  --_line: var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+  --_arrow: var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+  --_node-fill: var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+  --_node-stroke: var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+  --_group-fill: var(--bg);
+  --_group-hdr: color-mix(in srgb, var(--fg) 5%, var(--bg));
+  --_inner-stroke: color-mix(in srgb, var(--fg) 12%, var(--bg));
+  --_key-badge: color-mix(in srgb, var(--fg) 10%, var(--bg));
+
+  margin: 1.75em 0;
+  padding: var(--mooc-space-4) var(--mooc-space-3);
+  background: var(--mooc-surface);
+  border: 1px solid var(--mooc-border);
+  border-radius: var(--mooc-radius-md);
+  box-shadow: var(--mooc-shadow-sm);
+  overflow-x: auto;
+}
+
+.mermaid-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: var(--mooc-font);
+}
+
+.mermaid-diagram text {
+  font-family: var(--mooc-font);
+}
+
+.mermaid-diagram--error {
+  padding: var(--mooc-space-5);
+}
+
+.mermaid-diagram__error {
+  margin: 0 0 var(--mooc-space-3);
+  color: var(--mooc-muted);
+  font-size: var(--mooc-text-sm);
+}
+
+.mermaid-diagram__fallback {
+  margin: 0;
+  padding: var(--mooc-space-4);
+  background: var(--mooc-bg);
+  border: 1px solid var(--mooc-border);
+  border-radius: var(--mooc-radius-sm);
+  overflow-x: auto;
+  font-size: 0.875em;
+  line-height: 1.6;
+}
+
+.mermaid-diagram__fallback code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}

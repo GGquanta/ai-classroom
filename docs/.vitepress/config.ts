@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { configureMermaidMarkdown } from './mermaid/markdownPlugin.mjs'
 
 export default defineConfig({
   title: '国光量子 · AI 课堂',
@@ -17,6 +18,12 @@ export default defineConfig({
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
   ],
+
+  markdown: {
+    config(md) {
+      configureMermaidMarkdown(md)
+    },
+  },
 
   themeConfig: {
     logo: '/logo.png',
