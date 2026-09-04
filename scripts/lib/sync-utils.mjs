@@ -83,7 +83,7 @@ export function parseFrontmatter(content) {
  */
 export function serializeFrontmatter(meta, slug, categoryId) {
   const lines = ['---']
-  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'protected', 'featured', 'sidebar', 'aside']
+  const order = ['title', 'description', 'author', 'date', 'category', 'tags', 'cover', 'coverTone', 'protected', 'featured', 'sidebar', 'aside']
   const merged = {
     sidebar: false,
     aside: true,

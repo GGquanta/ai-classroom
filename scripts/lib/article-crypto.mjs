@@ -1,6 +1,7 @@
 import { createHash, pbkdf2Sync, randomBytes, createCipheriv, createDecipheriv } from 'node:crypto'
 import { join } from 'node:path'
 import { createMarkdownRenderer } from 'vitepress'
+import { configureMermaidMarkdown } from '../../docs/.vitepress/mermaid/markdownPlugin.mjs'
 
 export const PBKDF2_SALT = 'ai-classroom-protected'
 export const PBKDF2_ITERATIONS = 100_000
@@ -14,7 +15,11 @@ export async function initProtectedMarkdownRenderer(rootDir) {
 
   markdownRenderer = await createMarkdownRenderer(
     join(rootDir, 'docs'),
-    {},
+    {
+      config(md) {
+        configureMermaidMarkdown(md)
+      },
+    },
     '/',
     console,
   )

@@ -1,7 +1,6 @@
 ---
 title: Mac 本地大模型部署方案对比：Ollama、MLX、llama.cpp、LM Studio、vLLM
 description: 在 Apple Silicon Mac 上部署大模型的五种方案实测对比，涵盖安装、性能、适用场景及中国用户加速技巧，帮助选型。
-author: 闫程程
 date: 2026-08-05
 tags:
   - ollama

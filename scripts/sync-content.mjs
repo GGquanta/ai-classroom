@@ -43,7 +43,7 @@ const PROTECTED_PLACEHOLDER = `> 本文受密码保护。请在下方输入访�
 
 /** @typedef {{ id: string, label: string, dir: string, description?: string, color?: string }} Category */
 
-/** @typedef {{ title: string, description: string, author: string, date: string, tags: string[], category: string, cover?: string, layout?: string, sidebar?: boolean }} ArticleMeta */
+/** @typedef {{ title: string, description: string, author: string, date: string, tags: string[], category: string, cover?: string, coverTone?: string, layout?: string, sidebar?: boolean }} ArticleMeta */
 
 /**
  * @param {string} dir
@@ -172,6 +172,7 @@ async function main() {
       const date = String(meta.date ?? '1970-01-01')
       const tags = Array.isArray(meta.tags) ? meta.tags : meta.tags ? [String(meta.tags)] : []
       const cover = meta.cover ? String(meta.cover) : null
+      const coverTone = meta.coverTone ? String(meta.coverTone) : null
       const isProtected = isProtectedFlag(meta.protected)
       const isFeatured = isProtectedFlag(meta.featured)
       const articleId = `${category.id}/${slug}`
@@ -242,6 +243,7 @@ async function main() {
         categoryColor: stripQuotes(category.color ?? '#0b5cab'),
         link,
         cover,
+        ...(coverTone ? { coverTone } : {}),
         ...(isProtected ? { protected: true } : {}),
         ...(isFeatured ? { featured: true } : {}),
       })

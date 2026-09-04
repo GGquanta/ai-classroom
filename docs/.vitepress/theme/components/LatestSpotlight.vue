@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IconLock, IconSparkles } from '@tabler/icons-vue'
 import type { Article } from '../composables/useArticles'
-import { formatDate, getArticleCover } from '../composables/useArticles'
+import { formatDate, getArticleCover, normalizeColor } from '../composables/useArticles'
 
 defineProps<{
   articles: Article[]
@@ -15,8 +15,14 @@ defineProps<{
       :key="article.id"
       :href="article.link"
       class="spotlight-card spotlight-item"
-      :class="{ 'is-protected': article.protected }"
-      :style="{ '--spotlight-delay': `${index * 90}ms` }"
+      :class="{
+        'is-protected': article.protected,
+        'is-dark-cover': article.coverTone === 'dark',
+      }"
+      :style="{
+        '--spotlight-delay': `${index * 90}ms`,
+        '--spotlight-category-color': normalizeColor(article.categoryColor),
+      }"
     >
       <img
         class="spotlight-bg"

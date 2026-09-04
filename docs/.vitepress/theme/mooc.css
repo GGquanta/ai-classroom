@@ -2119,3 +2119,66 @@
     gap: var(--mooc-space-8);
   }
 }
+
+/* ── Dark-cover spotlight text ── */
+.spotlight-card.is-dark-cover .spotlight-content {
+  color: rgba(248, 250, 252, 0.96);
+  background: rgba(15, 23, 42, 0.58);
+  border-right-color: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    4px 0 20px rgba(2, 6, 23, 0.2),
+    inset -1px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+.spotlight-card.is-dark-cover:hover .spotlight-content {
+  background: rgba(15, 23, 42, 0.68);
+  border-right-color: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    6px 0 24px rgba(2, 6, 23, 0.24),
+    inset -1px 0 0 rgba(255, 255, 255, 0.16);
+}
+
+.spotlight-card.is-dark-cover .spotlight-title,
+.spotlight-card.is-dark-cover .spotlight-author {
+  color: rgba(248, 250, 252, 0.96);
+}
+
+.spotlight-card.is-dark-cover .spotlight-category {
+  color: color-mix(in srgb, var(--spotlight-category-color, var(--mooc-primary)) 45%, white);
+  text-shadow: 0 1px 10px rgba(2, 6, 23, 0.24);
+}
+
+.spotlight-card.is-dark-cover .spotlight-badge {
+  color: #bfdbfe;
+  background: rgba(15, 23, 42, 0.58);
+  border-color: rgba(147, 197, 253, 0.42);
+  box-shadow:
+    0 4px 16px rgba(2, 6, 23, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.spotlight-card.is-dark-cover .spotlight-badge-featured {
+  color: #fed7aa;
+  border-color: rgba(253, 186, 116, 0.45);
+}
+
+.spotlight-card.is-dark-cover .spotlight-desc,
+.spotlight-card.is-dark-cover .spotlight-byline {
+  color: rgba(226, 232, 240, 0.82);
+}
+
+@media (max-width: 768px) {
+  .spotlight-card.is-dark-cover .spotlight-content {
+    border-top-color: rgba(255, 255, 255, 0.2);
+    box-shadow:
+      0 -8px 40px rgba(2, 6, 23, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .spotlight-card.is-dark-cover:hover .spotlight-content {
+    border-top-color: rgba(255, 255, 255, 0.28);
+    box-shadow:
+      0 -12px 48px rgba(2, 6, 23, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+}
