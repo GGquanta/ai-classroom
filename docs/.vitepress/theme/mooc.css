@@ -1553,7 +1553,7 @@
 .article-hero-figure img {
   display: block;
   width: 100%;
-  aspect-ratio: 21 / 9;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   transition: filter 0.3s var(--mooc-ease);
 }
