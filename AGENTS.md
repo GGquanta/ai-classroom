@@ -70,9 +70,13 @@ featured: true                     # 可选，编辑推荐（卡片/正文展示
 
 ### 新增文章
 
-1. 在对应 `content/library/<分类>/` 下创建 `.md`
-2. 运行 `npm run sync` 或 `npm run docs:dev` 验证
-3. 提交 PR
+**投稿优先走 `import/`**，不要在内容 PR 里直接改 `content/library/` 或站点代码。维护者审核后再整理为正式文章：
+
+1. 在 `import/<作者目录>/` 下放置原稿与配图，并确认 `readme.md` 中的作者名称
+2. 提交 PR（仅含 Markdown 与图片，见下方「PR / 提交约定」）
+3. 维护者整理至 `content/library/<分类>/`，补全 frontmatter，运行 `npm run sync` 发布
+
+维护者本人直接入库时，可在 `content/library/<分类>/` 创建 `.md` 后执行 `npm run sync` 验证。
 
 ### 从 `import/` 导入文章
 
@@ -105,6 +109,12 @@ featured: true                     # 可选，编辑推荐（卡片/正文展示
 
 - **Commit message**：使用中文，前缀 `feat:`、`fix:`、`docs:`、`chore:` 等
 - **PR 描述**：说明变更类型（内容 / 配置 / 脚本），确认无敏感信息
+- **内容投稿优先提交到 `import/<作者目录>/`**（须有 `readme.md` 登记作者名称）。由维护者整理进 `content/library/`，投稿人不必也不应改站点实现。
+- **内容 PR 只允许文章相关文件**：
+  - 允许：`import/**`、`content/library/**/*.md`、`content/assets/**` 下的 Markdown 与图片
+  - **禁止**：修改项目代码、主题、样式、脚本、依赖与配置（例如 `.vue`、`.ts`、`.css`、`.yaml` / `.yml`、`.json`、`package.json`、`pnpm-*`、`scripts/`、`docs/.vitepress/` 等）
+- **不要提交同步产物**：`docs/articles/`、`docs/.vitepress/data/`、`docs/public/assets/`、`docs/public/article-sources/` 由维护者运行 `npm run sync` 生成；投稿 PR 无需包含。
+- 站点主题、配置、脚本的改动必须单独开 PR，不得夹在文章投稿中。
 
 ## 禁止事项
 
@@ -112,10 +122,11 @@ featured: true                     # 可选，编辑推荐（卡片/正文展示
 - 禁止将 API 密钥、Token 写入内容或 `.env` 并提交
 - 禁止在 `docs:build` 失败时强制合并 PR
 - 禁止删除他人文章 frontmatter 中的 `author` 字段
+- **禁止在内容投稿 PR 中修改项目代码或配置文件**（含 Vue/CSS/YAML/脚本/锁文件等）；此类改动应单独开 PR 并由维护者审核
 
 ## AI 助手工作提示
 
-- 帮用户**写投稿文章**时，文件放在 `content/library/<合适分类>/`，并补全 frontmatter
+- 帮用户**写投稿文章**时，优先放在 `import/<作者目录>/`（确认 `readme.md` 作者名称）；仅当用户明确要求直接入库时，才写入 `content/library/<合适分类>/` 并补全 frontmatter
 - 帮用户**从 `import/` 导入文章**时，先读取对应作者目录下的 `readme.md` 获取作者名称，写入 frontmatter 的 `author` 字段
 - 帮用户**改站点外观/导航**时，改 `docs/.vitepress/config.ts` 或主题文件
 - 帮用户**扩展自动化**时，优先改 `scripts/sync-content.mjs`
