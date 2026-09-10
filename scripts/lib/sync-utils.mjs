@@ -39,7 +39,9 @@ export function parseCategoriesYaml(raw) {
  * @returns {{ meta: Record<string, string | string[] | boolean>, body: string }}
  */
 export function parseFrontmatter(content) {
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
+  // Windows CRLF 下 `.` 不匹配 `\r`，`key: value\r` 会整行解析失败
+  const normalized = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+  const match = normalized.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)
   if (!match) return { meta: {}, body: content }
 
   /** @type {Record<string, string | string[] | boolean>} */

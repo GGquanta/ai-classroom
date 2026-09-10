@@ -76,6 +76,29 @@ protected: true
       assert.deepEqual(meta, {})
       assert.equal(body, raw)
     })
+
+    it('解析 CRLF 换行的 frontmatter', () => {
+      const raw = [
+        '---',
+        'title: 对话开太久了',
+        'author: 无敌大王',
+        'date: 2026-09-09',
+        'tags:',
+        '  - 上下文',
+        'cover: /assets/demo/cover.png',
+        '---',
+        '',
+        '# 正文',
+        '',
+      ].join('\r\n')
+      const { meta, body } = parseFrontmatter(raw)
+      assert.equal(meta.title, '对话开太久了')
+      assert.equal(meta.author, '无敌大王')
+      assert.equal(meta.date, '2026-09-09')
+      assert.deepEqual(meta.tags, ['上下文'])
+      assert.equal(meta.cover, '/assets/demo/cover.png')
+      assert.match(body.trim(), /^# 正文/)
+    })
   })
 
   describe('serializeFrontmatter', () => {
