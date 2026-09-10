@@ -10,6 +10,7 @@ tags:
   - context
 category: tools
 cover: /assets/cursor-model-selection-guide/cover.png
+coverTone: dark
 ---
 
 # Cursor 常用模型怎么选：模型档位、Effort 与 Context

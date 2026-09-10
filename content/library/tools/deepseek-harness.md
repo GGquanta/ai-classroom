@@ -10,6 +10,7 @@ tags:
   - harness
 category: tools
 cover: /assets/deepseek-harness/cover.jpg
+coverTone: dark
 ---
 
 ![DeepSeek Harness 封面：鲸标与插件模块](images/cover.jpg)
