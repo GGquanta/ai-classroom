@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/qrcode": "^1.5.6",
     "markdown-it": "^14.3.0",
+    "markdown-it-cjk-friendly": "^3.0.0",
     "vitepress": "^1.6.3",
     "wrangler": "^4.107.1"
   },

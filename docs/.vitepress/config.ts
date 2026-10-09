@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import { configureMermaidMarkdown } from './mermaid/markdownPlugin.mjs'
+import { configureSiteMarkdown } from './markdown/configure.mjs'
 
 export default defineConfig({
   title: '国光量子 · AI 课堂',
@@ -21,7 +21,7 @@ export default defineConfig({
 
   markdown: {
     config(md) {
-      configureMermaidMarkdown(md)
+      configureSiteMarkdown(md)
     },
   },
 
