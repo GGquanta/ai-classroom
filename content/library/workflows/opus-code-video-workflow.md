@@ -17,9 +17,9 @@ coverTone: dark
 
 # 用代码拍视频：Claude Opus 5.5 动效工作流与工具选型
 
-Claude Opus 5.5 做视频，走的是写代码、逐帧绘制、再编码成 MP4。下面把一条工具地图、13 个公开作品，以及三份案例与提示词仓库收成同一套做法：先定任务和渲染引擎，再装一套技能，用事实清单、节拍表和抽帧自检把成片稳住。
+Claude Opus 5.5 做视频，走的是写代码、逐帧绘制、再编码成 MP4。下面把一条工具地图、13 个公开作品，以及四份案例与提示词仓库收成同一套做法：先定任务和渲染引擎，再装一套技能，用事实清单、节拍表和抽帧自检把成片稳住。
 
-资料核对于 2026-10-12。来源包括 [Mnimiy 整理的 15 个仓库](https://x.com/mnilax/status/2109314840057565345)、[向阳乔木的提示词库](https://github.com/joeseesun/opus-video-prompts)、[opusvideo 案例片库](https://github.com/opusvideo/awesome-claude-video)、[athemeroy 的来源研究库](https://github.com/athemeroy/awesome-claude-5-5-videos)，以及知乎专栏 [《Opus 5.5 视频示例》](https://zhuanlan.zhihu.com/p/2089785598345326890)。知乎页采集时跳到登录验证；文中关于 475 支公开影片的比例和 13 个例子的结构，核对自 2026-10-03 同题公开文本，每条例子都链回创作者原帖。
+资料核对于 2026-10-12。来源包括 [Mnimiy 整理的 15 个仓库](https://x.com/mnilax/status/2109314840057565345)、[向阳乔木的提示词库](https://github.com/joeseesun/opus-video-prompts)、[opusvideo 案例片库](https://github.com/opusvideo/awesome-claude-video)、[athemeroy 的来源研究库](https://github.com/athemeroy/awesome-claude-5-5-videos)、[yihui 的提示词墙](https://github.com/yihui-dev/awesome-opus5-5-videos)，以及知乎专栏 [《Opus 5.5 视频示例》](https://zhuanlan.zhihu.com/p/2089785598345326890)。知乎页采集时跳到登录验证；文中关于 475 支公开影片的比例和 13 个例子的结构，核对自 2026-10-03 同题公开文本，每条例子都链回创作者原帖。
 
 ## 1. 代码在画每一帧
 
@@ -192,7 +192,7 @@ zero 的 UI 变形把一个形状走完按钮、播放器、图表和命令面�
 
 投入差一个数量级。快的是 Deedy 的约 2 美元；慢的包括 Leon Lin 用代码写完整配乐的发布片，约 8 小时（[原帖](https://x.com/LexnLin/status/2104148233106723099)）。中间还有约 15 分钟的宣传片、改两轮共约 19 分钟，以及三轮提示才定稿的例子。预算按多轮来估。
 
-## 5. 提示词库、片库和研究库各取什么
+## 5. 提示词库、片库、研究库和提示词墙各取什么
 
 ### 提示词库：四条技术路线，一种模板骨架
 
@@ -256,6 +256,69 @@ zero 的 UI 变形把一个形状走完按钮、播放器、图表和命令面�
 
 公开说明分成四栏，各写各的：「一句提示」记录人类开口的轮数，「纯代码」记录画面怎么画出来，「零外部素材」记录输入边界，「无人修改」记录审片过程。
 
+### 提示词墙：复制提示，并看对照重制
+
+[yihui-dev/awesome-opus5-5-videos](https://github.com/yihui-dev/awesome-opus5-5-videos)（MIT，核对于 2026-10-12）把创作者公开的提示词收成单文件，并在 [Skillry](https://skillry.dev/ai-videos/opus-5-5) 上把原片和现场重制并排播放。前面几节用来选路线；要换题目试同一条提示，从这里复制。
+
+当天的收录是：`prompts/` 和 `data/videos.json` 里 853 条提示，其中 523 条有现场重制。README 另精选 100 条互不重复的提示，分成动态图形 58、讲解 16、三维场景 14、游戏与交互 12。同一天又补了 10 支片（多为讲解和三维）以及 330 条提示，下面表里是其中最新的 30 条。
+
+精选墙里，动态图形超过一半，技术标注反复出现 Canvas、SVG 和 GSAP。三维和游戏更常标 Three.js、GLSL；可玩的条目还会标 Playable、像素或物理。作品和提示词仍归创作者，预览短片由该列表托管。
+
+上文已经写过的片子，在这面墙上有对应文件：
+
+| 上文作品 | 提示词文件 |
+| --- | --- |
+| 推理创业发布片 | [deedydas](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/deedydas-252537.md) |
+| 真实素材的 SaaS 片 | [moritzkremb](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/moritzkremb-466494.md) |
+| 一镜到底的冲印应用 | [twoclipping](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/twoclipping-496100.md) |
+| Negroni 配方 | [ror-fly](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/ror-fly-880547.md) |
+| 递归讲解 | [emollick](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/emollick-019567.md) |
+| AI 史上的关键时刻 | [kloss-xyz](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/kloss-xyz-067876.md) |
+| 折纸人类故事 | [songkeys](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/songkeys-384673.md) |
+| 沙画美国史 | [michaelzsguo](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/michaelzsguo-782312.md) |
+| 火车窗外的四季 | [itsolelehmann](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/itsolelehmann-762215.md) |
+| 代码配乐的发布片 | [lexnlin](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/lexnlin-241739.md) |
+
+用法就三步：打开 `prompts/` 里的文件，复制 **Prompt** 代码块，贴给 Opus 5.5，并要求收成单个 HTML。要 MP4 时，再走第二节的逐帧渲染。有的作者只公开了一部分提示，或只在帖子里描述了结果，这些文件会写明。
+
+两条当天新增的记录，和前面的流水线是同一件事的更硬版本：
+
+- [@0xKarmi](https://x.com/0xKarmi/status/2108495927988129839) 的文件把制作拆成固定画布、无窗口引擎对帧号调用一次 `draw(f)`、FFmpeg 编码，以及构建后的三轮检查。接缝检查把第 0 帧和第 720 帧逐像素对比，差一个像素就说明运动没有周期性。人看片之前先过六项是非门。文件记下一次渲染：1820 帧，六项计数都是零（[提示词文件](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/0xkarmi-129839.md)）。
+- [@fleyta88](https://x.com/fleyta88/status/2108249741125443662) 把 GSAP 时间轴的时长写死：卡片 280ms、标题 220ms、元数据 160ms、元素错峰 60ms。再用 Playwright 逐帧截图，发现过冲就打补丁，不整段重写（[提示词文件](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/fleyta88-443662.md)）。
+
+| 最新提示 | 作者 | 文件 |
+| --- | --- | --- |
+| [动态图形音乐机](https://x.com/adrianduta96/status/2109187815195992248) | @adrianduta96 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/adrianduta96-992248.md) |
+| [喀拉喀托火山 WebGL](https://x.com/pagustafsson/status/2108936279081566609) | @pagustafsson | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/pagustafsson-566609.md) |
+| [云上城堡](https://x.com/YouWareAI/status/2108825933608300653) | @YouWareAI | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/youwareai-300653.md) |
+| [三维标志片头](https://x.com/juancarlos17626/status/2108663865936429530) | @juancarlos17626 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/juancarlos17626-429530.md) |
+| [苹果演进动态图形](https://x.com/aiRobertDaily/status/2108596616756416945) | @aiRobertDaily | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/airobertdaily-416945.md) |
+| [动态图形发布片](https://x.com/softal_io/status/2108574208548614622) | @softal_io | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/softal-io-614622.md) |
+| [黄金时刻庄园](https://x.com/Thusatharan/status/2108544807333433543) | @Thusatharan | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/thusatharan-433543.md) |
+| [交互式枯山水](https://x.com/arixxbt/status/2108541814718292438) | @arixxbt | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/arixxbt-292438.md) |
+| [Opus 5.5 动画故事](https://x.com/N01ennn/status/2108520767092597182) | @N01ennn | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/n01ennn-597182.md) |
+| [电影感 F1 进站](https://x.com/rubenssoto_ai/status/2108512810774802657) | @rubenssoto_ai | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/rubenssoto-ai-802657.md) |
+| [程序化三维大象](https://x.com/Thusatharan/status/2108511286795640926) | @Thusatharan | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/thusatharan-640926.md) |
+| [品牌预告](https://x.com/UtsavChopra30/status/2108510252404560359) | @UtsavChopra30 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/utsavchopra30-560359.md) |
+| [由帧号决定的渲染](https://x.com/0xKarmi/status/2108495927988129839) | @0xKarmi | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/0xkarmi-129839.md) |
+| [天坛三维动画](https://x.com/shunshu32385143/status/2108480534254944719) | @shunshu32385143 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/shunshu32385143-944719.md) |
+| [刹车踏板应力模拟](https://x.com/chang_/status/2108458503367200908) | @chang_ | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/chang-200908.md) |
+| [Rust 逐帧音频响应](https://x.com/BuildFastWithAI/status/2108403445304844291) | @BuildFastWithAI | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/buildfastwithai-844291.md) |
+| [带旁白的交互演示](https://x.com/Drake5112/status/2108394129000661428) | @Drake5112 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/drake5112-661428.md) |
+| [土星五号可交互模型](https://x.com/aichrislee/status/2108347412636938609) | @aichrislee | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/aichrislee-938609.md) |
+| [SaaS 发布片](https://x.com/Screeendev/status/2108333630623981790) | @Screeendev | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/screeendev-981790.md) |
+| [熔岩灯 WebGL](https://x.com/juancarlos17626/status/2108301453907382690) | @juancarlos17626 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/juancarlos17626-382690.md) |
+| [房屋生长](https://x.com/cryptowluha/status/2108253385829060792) | @cryptowluha | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/cryptowluha-060792.md) |
+| [带逐帧检查的 GSAP 时间轴](https://x.com/fleyta88/status/2108249741125443662) | @fleyta88 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/fleyta88-443662.md) |
+| [UI 运动循环](https://x.com/flxrnc/status/2108242454105251921) | @flxrnc | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/flxrnc-251921.md) |
+| [Blender 汽车追逐预演](https://x.com/tonysurix/status/2108230699224596746) | @tonysurix | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/tonysurix-596746.md) |
+| [食欲产品发布片](https://x.com/ultimaxbt/status/2108210884799549714) | @ultimaxbt | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/ultimaxbt-549714.md) |
+| [Minecraft 街景](https://x.com/0xverdao/status/2108188411844776363) | @0xverdao | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/0xverdao-776363.md) |
+| [电影感梦境](https://x.com/SimonasLTU1/status/2108175272964981181) | @SimonasLTU1 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/simonasltu1-981181.md) |
+| [小组件动效](https://x.com/Khlaseek_dsgner/status/2108167809997877659) | @Khlaseek_dsgner | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/khlaseek-dsgner-877659.md) |
+| [AI 史动态视频](https://x.com/btcup99/status/2108152460523311469) | @btcup99 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/btcup99-311469.md) |
+| [诺贝尔奖科学](https://x.com/KeWai386772/status/2108143449841262769) | @KeWai386772 | [提示词](https://github.com/yihui-dev/awesome-opus5-5-videos/blob/main/prompts/kewai386772-262769.md) |
+
 ## 6. 开工检查清单
 
 - 任务已选定，只装了对应的引擎和一套技能。
@@ -279,6 +342,7 @@ zero 的 UI 变形把一个形状走完按钮、播放器、图表和命令面�
 - [joeseesun/opus-video-prompts](https://github.com/joeseesun/opus-video-prompts)
 - [opusvideo/awesome-claude-video](https://github.com/opusvideo/awesome-claude-video)
 - [athemeroy/awesome-claude-5-5-videos](https://github.com/athemeroy/awesome-claude-5-5-videos)
+- [yihui-dev/awesome-opus5-5-videos](https://github.com/yihui-dev/awesome-opus5-5-videos)（提示词墙，MIT；对照重制在 [Skillry](https://skillry.dev/ai-videos/opus-5-5)）
 - 封面与发布片静帧：[AbubakrChan/product-launch-motion](https://github.com/AbubakrChan/product-launch-motion)，MIT
 - 接触表与设置界面帧：[whaleyxbt/claude-motion](https://github.com/whaleyxbt/claude-motion)，MIT
 - 里程碑粒子帧：[charlie947/motion-graphics-skills](https://github.com/charlie947/motion-graphics-skills)，MIT
