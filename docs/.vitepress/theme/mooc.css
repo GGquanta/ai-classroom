@@ -23,6 +23,13 @@
   max-width: 820px;
 }
 
+.vp-doc img[src*="clawbot-plugin"],
+.vp-doc img[src*="wechat-chat"] {
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+}
+
 .site-shell.is-article .VPDocAside {
   max-width: 240px;
 }
