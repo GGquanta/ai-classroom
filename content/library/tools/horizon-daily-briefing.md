@@ -2,7 +2,7 @@
 title: 用 Horizon 做一份每天寄到邮箱的个人新闻日报
 description: 从安装 Horizon、按自己的兴趣接信息源，到每天定时把中文日报发到企业邮箱。含评分门槛、定时任务，以及把安装和排错交给 Cursor 的提示词。
 author: niuqq
-date: 2026-10-16
+date: 2026-10-20
 tags:
   - horizon
   - rss

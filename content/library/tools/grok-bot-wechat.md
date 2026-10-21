@@ -2,13 +2,14 @@
 title: 把 Grok Bot 接入微信
 description: 用微信 ClawBot 的 iLink 接口把 Grok Bot 接到个人微信：发送接入提示词、填入 Webhook 凭证，扫码后发第一条消息即可在微信里下指令。
 author: wh
-date: 2026-10-16
+date: 2026-10-19
 tags:
   - grok-bot
   - wechat
   - clawbot
 category: tools
 cover: /assets/grok-bot-wechat/cover.jpg
+coverTone: dark
 ---
 
 ![Grok Bot 与微信建立连接](../../assets/grok-bot-wechat/cover.jpg)
