@@ -302,6 +302,13 @@
   box-shadow: var(--mooc-shadow-md);
 }
 
+.site-shell.is-article .vp-doc img[src*="clawbot-plugin"],
+.site-shell.is-article .vp-doc img[src*="wechat-chat"] {
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+}
+
 .site-shell.is-article .vp-doc p:has(img) {
   margin: 2.5em 0;
 }

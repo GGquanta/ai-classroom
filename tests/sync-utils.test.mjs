@@ -136,6 +136,14 @@ protected: true
         '![图](/assets/demo-article/a.png) 和 ![图](/assets/demo-article/b.png)',
       )
     })
+
+    it('将 ../../assets 相对路径改写为站点绝对路径', () => {
+      const body = '![封面](../../assets/grok-bot-wechat/cover.jpg)'
+      assert.equal(
+        rewriteImagePaths(body, 'grok-bot-wechat'),
+        '![封面](/assets/grok-bot-wechat/cover.jpg)',
+      )
+    })
   })
 
   describe('extractTitleFromBody', () => {

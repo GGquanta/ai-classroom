@@ -126,6 +126,7 @@ export function rewriteImagePaths(body, slug) {
   return body
     .replace(/!\[([^\]]*)\]\(images\//g, `![$1](/assets/${slug}/`)
     .replace(/!\[([^\]]*)\]\(\.\/images\//g, `![$1](/assets/${slug}/`)
+    .replace(/!\[([^\]]*)\]\(\.\.\/\.\.\/assets\//g, `![$1](/assets/`)
 }
 
 /**
